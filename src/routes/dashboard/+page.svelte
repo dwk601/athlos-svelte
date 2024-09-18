@@ -82,15 +82,11 @@
 			</CardHeader>
 			<CardContent>
 				{#each upcomingGames as game}
-					<div class="mb-2 flex items-center justify-between">
+					<Button variant="ghost" class="mb-2 flex items-center justify-between w-full" on:click={() => routeToPage(`games/${game.id}`)}>
 						<span>{game.name}</span>
 						<Badge variant="outline">{game.date}</Badge>
-					</div>
+					</Button>
 				{/each}
-				<Button class="mt-4 w-full">
-					<CircleAlert class="mr-2 h-4 w-4" />
-					View All Games
-				</Button>
 			</CardContent>
 		</Card>
 
