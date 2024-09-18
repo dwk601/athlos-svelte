@@ -84,7 +84,7 @@
 				{/each}
 				<Button class="mt-4">
 					<CircleAlert class="mr-2 h-4 w-4" />
-					Schedule New Game
+					View All Games
 				</Button>
 			</CardContent>
 		</Card>
