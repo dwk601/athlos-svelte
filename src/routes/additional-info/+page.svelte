@@ -63,7 +63,7 @@
 </Card>
 
 {#if !firstName}
-	<div class="flex items-center justify-center mt-4 p-4 bg-yellow-100 text-yellow-800 rounded-md"></div>
+    <div class="inline-flex items-center justify-center mt-4 p-4 bg-yellow-100 text-yellow-800 rounded-md">
 		<CircleAlert class="mr-2 h-4 w-4" />
 		<p class="text-sm">Please fill in the required First Name field.</p>
 	</div>
