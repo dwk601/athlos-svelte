@@ -8,7 +8,7 @@
 
     let user = {
         name: "John Doe",
-        avatar: "/images/user.png",
+        avatar: "",
     };
 
     let pastGames = [
