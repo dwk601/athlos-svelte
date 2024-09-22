@@ -3,6 +3,7 @@
 	import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
 	import { Users, Calendar, Trophy } from "lucide-svelte";;
 </script>
+<!--잘 만들었네요 ㅋㅋ-->
 
 <div class="bg-background min-h-screen flex items-center justify-center">
 	<main class="container mx-auto px-4">
