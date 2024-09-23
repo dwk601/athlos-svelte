@@ -17,20 +17,20 @@
     };
 
     let pastGames = [
-        { id: 1, name: 'Chess Tournament', date: '2023-11-15' },
-        { id: 2, name: 'Poker Night', date: '2023-11-10' },
-        { id: 3, name: 'Scrabble Challenge', date: '2023-11-05' }
+        { id: 1, name: '예전 축구', date: '2024--8-15' },
+        { id: 2, name: '예전 다른거', date: '2024-08-10' },
+        { id: 3, name: '예전 또다른거', date: '2024-08-05' }
     ];
 
     let upcomingGames = [
-        { id: 4, name: 'Monopoly Marathon', date: '2023-12-01' },
-        { id: 5, name: 'Catan Championship', date: '2023-12-10' }
+        { id: 1, name: '축구', date: '2024-09-15' },
+        { id: 2, name: '다른거', date: '2024-09-18' },
     ];
 
     let groups = [
-        { id: 1, name: 'Board Game Enthusiasts' },
-        { id: 2, name: 'Strategy Gamers Unite' },
-        { id: 3, name: 'Casual Gaming Club' }
+        { id: 1, name: '느그리그' },
+        { id: 2, name: '다른리그' },
+        { id: 3, name: '우리리그' }
     ];
 
     let notifications = [
