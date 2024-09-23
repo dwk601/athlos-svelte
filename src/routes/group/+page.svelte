@@ -4,13 +4,13 @@
     import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
 
     let groups = [
-        { id: 1, name: "Board Game Enthusiasts" },
-        { id: 2, name: "Strategy Gamers Unite" },
-        { id: 3, name: "Casual Gaming Club" },
+        { id: 1, name: "느그리그" },
+        { id: 2, name: "Korean Club" },
+        { id: 3, name: "Nothing here" },
     ];
 
-    function routeToPage(route: string, replaceState = false) {
-        goto(`/${route}`, { replaceState });
+    function routeToPage(group: { id: any; name: any; }) {
+        goto(`/group/${group.id}?name=${encodeURIComponent(group.name)}`);
     }
 </script>
 
@@ -23,7 +23,7 @@
                     <CardTitle>{group.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Button variant="ghost" class="w-full" on:click={() => routeToPage(`group/${group.id}`)}>
+                    <Button variant="ghost" class="w-full" on:click={() => routeToPage(group)}>
                         View Group
                     </Button>
                 </CardContent>
