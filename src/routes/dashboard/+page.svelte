@@ -25,6 +25,7 @@
     let upcomingGames = [
         { id: 1, name: '축구', date: '2024-09-15' },
         { id: 2, name: '다른거', date: '2024-09-18' },
+        { id: 3, name: '또다른거', date: '2024-09-20' }
     ];
 
     let groups = [
