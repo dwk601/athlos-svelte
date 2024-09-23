@@ -101,14 +101,16 @@
             <h2 class="text-lg font-semibold mb-4">Upcoming Games</h2>
             <ScrollArea class="h-[calc(100vh-8rem)]">
                 {#each upcomingGames as game}
-                    <Card class="mb-4">
-                        <CardHeader>
-                            <CardTitle>{game.name}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p>Date: {game.date}</p>
-                        </CardContent>
-                    </Card>
+                    <a href={`/games/${game.id}`} class="block">
+                        <Card class="mb-4">
+                            <CardHeader>
+                                <CardTitle>{game.name}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p>Date: {game.date}</p>
+                            </CardContent>
+                        </Card>
+                    </a>
                 {/each}
             </ScrollArea>
         </SheetContent>
