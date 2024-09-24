@@ -54,6 +54,16 @@ export const groups = [
     { id: 2, name: '느그리그', createdBy: users[1].id },
 ];
 
+// Games
+export const games = [
+    { id: 1, name: '예전 축구', date: '2024-08-15', type: 'past' },
+    { id: 2, name: '예전 다른거', date: '2024-08-10', type: 'past' },
+    { id: 3, name: '예전 또다른거', date: '2024-08-05', type: 'past' },
+    { id: 4, name: '축구', date: '2024-09-15', type: 'upcoming' },
+    { id: 5, name: '다른거', date: '2024-09-18', type: 'upcoming' },
+    { id: 6, name: '또다른거', date: '2024-09-20', type: 'upcoming' }
+];
+
 // Chats
 export const chats = [
     {
