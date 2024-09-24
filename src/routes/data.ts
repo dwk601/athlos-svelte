@@ -37,12 +37,21 @@ export const users = [
         role: roles[1],  // User
         checkInStatus: 'not checked in',
     },
+    {
+        id: 4,
+        firstName: '동욱',
+        lastName: '김',
+        age: 25,
+        groupId: 1,
+        role: roles[3],  // Group Member
+        checkInStatus: 'checked in',
+    },
 ];
 
 // Groups
 export const groups = [
     { id: 1, name: 'Basketball Enthusiasts', createdBy: users[0].id },
-    { id: 2, name: 'Soccer Lovers', createdBy: users[1].id },
+    { id: 2, name: '느그리그', createdBy: users[1].id },
 ];
 
 // Chats
