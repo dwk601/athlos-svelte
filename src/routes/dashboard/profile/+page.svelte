@@ -6,8 +6,6 @@
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "$lib/components/ui/card";
 	import { Camera } from "lucide-svelte";;
 
-	export let data;
-
 	let firstName = "";
 	let lastName = "";
 	let profilePicture = "";
