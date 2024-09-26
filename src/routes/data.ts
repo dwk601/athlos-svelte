@@ -56,6 +56,8 @@ export const users = [
 export const groups = [
     { id: 1, name: 'Basketball Enthusiasts', createdBy: users[0].id },
     { id: 2, name: '느그리그', createdBy: users[1].id },
+    { id: 3, name: 'Soccer Lovers', createdBy: users[2].id },
+    { id: 4, name: '테스트', createdBy: users[3].id },
 ];
 
 // Games

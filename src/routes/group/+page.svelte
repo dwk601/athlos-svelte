@@ -3,11 +3,9 @@
     import { Button } from "$lib/components/ui/button";
     import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
 
-    let groups = [
-        { id: 1, name: "느그리그" },
-        { id: 2, name: "Korean Club" },
-        { id: 3, name: "Nothing here" },
-    ];
+    export let data;
+
+    let { groups } = data;
 
     function routeToPage(group: { id: any; name: any; }) {
         goto(`/group/${group.id}?name=${encodeURIComponent(group.name)}`);
