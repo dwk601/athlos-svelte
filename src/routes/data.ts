@@ -18,6 +18,7 @@ export const users = [
         groupId: 1,
         role: roles[2],  // Group Admin
         checkInStatus: 'checked in',
+        avatar: 'https://avatars.dicebear.com/api/avataaars/johndoe.svg',
     },
     {
         id: 2,
@@ -27,6 +28,7 @@ export const users = [
         groupId: 2,
         role: roles[3],  // Group Member
         checkInStatus: 'not checked in',
+        avatar: 'https://avatars.dicebear.com/api/avataaars/janesmith.svg',
     },
     {
         id: 3,
@@ -36,6 +38,7 @@ export const users = [
         groupId: null,
         role: roles[1],  // User
         checkInStatus: 'not checked in',
+        avatar: 'https://avatars.dicebear.com/api/avataaars/mikejohnson.svg',
     },
     {
         id: 4,
@@ -45,6 +48,7 @@ export const users = [
         groupId: 1,
         role: roles[3],  // Group Member
         checkInStatus: 'checked in',
+        avatar: 'https://avatars.dicebear.com/api/avataaars/dongwookkim.svg',
     },
 ];
 

@@ -7,45 +7,20 @@
     import { Popover, PopoverContent, PopoverTrigger } from '$lib/components/ui/popover';
     import { goto } from '$app/navigation';
 
+    export let data;
+
+    let { user, notifications, upcomingGames, pastGames, groups } = data;
+
     function routeToPage(route: string, replaceState = false) {
         goto(`/${route}`, { replaceState });
     }
-
-    let user = {
-        name: 'John Doe',
-        avatar: ''
-    };
-
-    let pastGames = [
-        { id: 1, name: '예전 축구', date: '2024--8-15' },
-        { id: 2, name: '예전 다른거', date: '2024-08-10' },
-        { id: 3, name: '예전 또다른거', date: '2024-08-05' }
-    ];
-
-    let upcomingGames = [
-        { id: 1, name: '축구', date: '2024-09-15' },
-        { id: 2, name: '다른거', date: '2024-09-18' },
-        { id: 3, name: '또다른거', date: '2024-09-20' }
-    ];
-
-    let groups = [
-        { id: 1, name: '느그리그' },
-        { id: 2, name: '다른리그' },
-        { id: 3, name: '우리리그' }
-    ];
-
-    let notifications = [
-        { id: 1, message: 'New game invitation from Alice' },
-        { id: 2, message: 'Bob commented on your last game' },
-        { id: 3, message: 'Upcoming tournament reminder' }
-    ];
 
     let unreadNotifications = notifications.length;
 </script>
 
 <div class="container mx-auto p-4">
     <div class="mb-6 flex items-center justify-between">
-        <h1 class="text-3xl font-bold">Welcome, {user.name}!</h1>
+        <h1 class="text-3xl font-bold">Welcome, {user.firstName}!</h1>
         <Popover>
             <PopoverTrigger>
                 <Button variant="ghost" class="relative">
@@ -98,16 +73,16 @@
             <CardContent>
                 <div class="flex items-center space-x-4">
                     <Avatar>
-                        <AvatarImage src={user.avatar} alt={user.name} />
+                        <AvatarImage src={user.avatar} alt={user.firstName} />
                         <AvatarFallback>
-                            {user.name
+                            {user.firstName
                                 .split(' ')
                                 .map((n) => n[0])
                                 .join('')}
                         </AvatarFallback>
                     </Avatar>
                     <div>
-                        <h2 class="text-xl font-semibold">{user.name}</h2>
+                        <h2 class="text-xl font-semibold">{user.firstName}</h2>
                         <Button
                             variant="outline"
                             class="mt-2 w-full"
