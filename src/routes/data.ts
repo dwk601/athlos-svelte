@@ -110,7 +110,7 @@ export const games = [
 	{
 		id: 4,
 		name: '축구',
-		date: '2024-09-15',
+		date: '2024-10-15',
 		type: 'upcoming',
 		location: 'Provo, UT',
 		attenders: [users[0], users[1], users[4]]
@@ -118,7 +118,7 @@ export const games = [
 	{
 		id: 5,
 		name: '다른거',
-		date: '2024-09-18',
+		date: '2024-10-18',
 		type: 'upcoming',
 		location: 'Salt Lake City, UT',
 		attenders: [users[1], users[2]]
@@ -126,7 +126,7 @@ export const games = [
 	{
 		id: 6,
 		name: '또다른거',
-		date: '2024-09-20',
+		date: '2024-10-20',
 		type: 'upcoming',
 		location: 'Ogden, UT',
 		attenders: [users[2], users[3]]
@@ -134,7 +134,7 @@ export const games = [
 	{
 		id: 7,
 		name: 'Basketball Game',
-		date: '2024-10-01',
+		date: '2024-11-01',
 		type: 'upcoming',
 		location: 'Provo, UT',
 		attenders: [users[0], users[4], users[5]]
