@@ -7,13 +7,13 @@
     import { Card, CardHeader, CardTitle, CardContent } from '$lib/components/ui/card';
     import { Send, Users, Calendar } from 'lucide-svelte';
 
-    let messages = [
-        { user: '동욱', text: 'Hey everyone! Ready for the next game?' },
-        { user: 'Bob', text: "Absolutely! Can't wait!" },
-        { user: '준', text: 'What time are we meeting?' }
-    ];
+    // let messages = [
+    //     { user: '동욱', text: 'Hey everyone! Ready for the next game?' },
+    //     { user: 'Bob', text: "Absolutely! Can't wait!" },
+    //     { user: '준', text: 'What time are we meeting?' }
+    // ];
 
-    let newMessage = '';
+    // let newMessage = '';
 
     let groupMembers = [
         { name: '동욱', avatar: '/images/user.png' },
@@ -28,12 +28,12 @@
         { id: 3, name: '또다른거', date: '2024-09-20' }
     ];
 
-    function sendMessage() {
-        if (newMessage.trim()) {
-            messages = [...messages, { user: 'You', text: newMessage.trim() }];
-            newMessage = '';
-        }
-    }
+    // function sendMessage() {
+    //     if (newMessage.trim()) {
+    //         messages = [...messages, { user: 'You', text: newMessage.trim() }];
+    //         newMessage = '';
+    //     }
+    // }
 </script>
 
 <div class="flex h-screen bg-background">
@@ -74,7 +74,7 @@
         </ScrollArea>
     </aside>
 
-    <main class="flex-1 p-4 flex flex-col">
+    <!-- <main class="flex-1 p-4 flex flex-col">
         <ScrollArea class="flex-1 mb-4">
             {#each messages as message}
                 <div class="mb-4">
@@ -89,7 +89,7 @@
                 <Send class="h-4 w-4" />
             </Button>
         </div>
-    </main>
+    </main> -->
 
     <Sheet>
         <SheetTrigger>
