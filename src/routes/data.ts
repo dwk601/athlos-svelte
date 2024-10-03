@@ -87,6 +87,7 @@ export const games = [
 		id: 1,
 		name: '예전 축구',
 		date: '2024-08-15',
+		time: '06:00',
 		type: 'past',
 		location: 'Provo, UT',
 		attenders: [users[0], users[1], users[4]]
@@ -95,6 +96,7 @@ export const games = [
 		id: 2,
 		name: '예전 다른거',
 		date: '2024-08-10',
+		time: '07:00',
 		type: 'past',
 		location: 'Provo, UT',
 		attenders: [users[1], users[2]]
@@ -103,6 +105,7 @@ export const games = [
 		id: 3,
 		name: '예전 또다른거',
 		date: '2024-08-05',
+		time: '21:00',
 		type: 'past',
 		location: 'Provo, UT',
 		attenders: [users[2], users[3]]
@@ -111,6 +114,7 @@ export const games = [
 		id: 4,
 		name: '축구',
 		date: '2024-10-15',
+		time: '06:00',
 		type: 'upcoming',
 		location: 'Provo, UT',
 		attenders: [users[0], users[1], users[4]]
@@ -119,6 +123,7 @@ export const games = [
 		id: 5,
 		name: '다른거',
 		date: '2024-10-18',
+		time: '07:00',
 		type: 'upcoming',
 		location: 'Salt Lake City, UT',
 		attenders: [users[1], users[2]]
@@ -127,6 +132,7 @@ export const games = [
 		id: 6,
 		name: '또다른거',
 		date: '2024-10-20',
+		time: '21:00',
 		type: 'upcoming',
 		location: 'Ogden, UT',
 		attenders: [users[2], users[3]]
@@ -135,6 +141,7 @@ export const games = [
 		id: 7,
 		name: 'Basketball Game',
 		date: '2024-11-01',
+		time: '18:00',
 		type: 'upcoming',
 		location: 'Provo, UT',
 		attenders: [users[0], users[4], users[5]]
@@ -143,6 +150,7 @@ export const games = [
 		id: 8,
 		name: 'Chess Tournament',
 		date: '2024-10-05',
+		time: '19:00',
 		type: 'upcoming',
 		location: 'Provo, UT',
 		attenders: [users[3], users[4], users[5]]

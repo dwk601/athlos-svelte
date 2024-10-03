@@ -2,16 +2,16 @@
 
 Athlos is a web application designed to streamline the management of soccer games and teams. Built with modern technologies, it aims to solve common issues faced by soccer enthusiasts who organize regular games.
 
-## Features
+## Roadmap
 
-- **Team Member Management**: Easily add, remove, and update team members.
-- **Check-in System**: Track player attendance for each game.
-- **Rating System**: Implement a fair team division based on player ratings.
-- **Upcoming Games**: View and manage scheduled matches.
-- **Recent Activities**: Keep track of past games and player performances.
-- **User Authentication**: Secure user authentication powered by Kinde Auth.
-- **Group Management**: Create and join groups for organizing games.
-- **Game Management**: Create and manage games within groups.
+- [ ] **Team Member Management**: Easily add, remove, and update team members.
+- [ ] **Check-in System**: Track player attendance for each game.
+- [ ] **Rating System**: Implement a fair team division based on player ratings.
+- [ ] **Upcoming Games**: View and manage scheduled matches.
+- [ ] **Recent Activities**: Keep track of past games and player performances.
+- [ ] **User Authentication**: Secure user authentication powered by Kinde Auth.
+- [ ] **Group Management**: Create and join groups for organizing games.
+- [ ] **Game Management**: Create and manage games within groups.
 
 ## Tech Stack
 
