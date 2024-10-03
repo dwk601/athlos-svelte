@@ -37,7 +37,7 @@
 		</Card>
 		<Button class="w-full" on:click={createGame}>Create a Game</Button>
 	</div>
-	
+
 	<Separator orientation="horizontal" class="md:hidden" />
 	<Separator orientation="vertical" class="hidden h-auto md:block" />
 
@@ -49,18 +49,20 @@
 			<CardContent>
 				<div class="grid gap-4">
 					{#each upcomingGames as game}
-						<Card>
-							<CardHeader>
-								<CardTitle>{game.name}</CardTitle>
-							</CardHeader>
-							<CardContent>
-								<div class="flex items-center space-x-2 text-sm">
-									<Calendar class="h-4 w-4" />
-									<span>{game.date} at {game.time}</span>
-								</div>
-								<p class="mt-2 text-sm text-muted-foreground">Location: {game.location}</p>
-							</CardContent>
-						</Card>
+						<a href={`/games/${game.id}`} class="block">
+							<Card class="cursor-pointer transition-shadow duration-200 hover:shadow-lg">
+								<CardHeader>
+									<CardTitle>{game.name}</CardTitle>
+								</CardHeader>
+								<CardContent>
+									<div class="flex items-center space-x-2 text-sm">
+										<Calendar class="h-4 w-4" />
+										<span>{game.date} at {game.time}</span>
+									</div>
+									<p class="mt-2 text-sm text-muted-foreground">Location: {game.location}</p>
+								</CardContent>
+							</Card>
+						</a>
 					{/each}
 				</div>
 			</CardContent>
