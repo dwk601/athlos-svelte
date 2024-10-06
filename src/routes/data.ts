@@ -25,7 +25,7 @@ export const users = [
 		firstName: 'Jane',
 		lastName: 'Smith',
 		age: 30,
-		groupId: 2,
+		groupId: 1,
 		role: roles[3], // Group Member
 		checkInStatus: 'not checked in',
 		avatar: 'https://avatars.dicebear.com/api/avataaars/janesmith.svg'
@@ -65,7 +65,7 @@ export const users = [
 		firstName: 'Bob',
 		lastName: 'Davis',
 		age: 35,
-		groupId: 4,
+		groupId: 2,
 		role: roles[2], // User
 		checkInStatus: 'not checked in',
 		avatar: 'https://avatars.dicebear.com/api/avataaars/bobdavis.svg'
@@ -76,84 +76,90 @@ export const users = [
 export const groups = [
 	{ id: 1, name: 'Basketball Enthusiasts', createdBy: users[0].id },
 	{ id: 2, name: '느그리그', createdBy: users[1].id },
-	{ id: 3, name: 'Soccer Lovers', createdBy: users[2].id },
-	{ id: 4, name: '테스트', createdBy: users[3].id },
-	{ id: 5, name: 'Chess Club', createdBy: users[4].id }
+	{ id: 3, name: 'Soccer Lovers', createdBy: users[2].id }
 ];
 
 // Games
 export const games = [
 	{
 		id: 1,
+		groupId: 1,
 		name: '예전 축구',
 		date: '2024-08-15',
 		time: '06:00',
 		type: 'past',
 		location: 'Provo, UT',
-		attenders: [users[0], users[1], users[4]]
+		attenders: [users[0], users[4]] // Only group members
 	},
 	{
 		id: 2,
+		groupId: 3,
 		name: '예전 다른거',
 		date: '2024-08-10',
 		time: '07:00',
 		type: 'past',
 		location: 'Provo, UT',
-		attenders: [users[1], users[2]]
+		attenders: [] // No group members
 	},
 	{
 		id: 3,
+		groupId: 1,
 		name: '예전 또다른거',
 		date: '2024-08-05',
 		time: '21:00',
 		type: 'past',
 		location: 'Provo, UT',
-		attenders: [users[2], users[3]]
+		attenders: [users[3]] // Only group members
 	},
 	{
 		id: 4,
+		groupId: 2,
 		name: '축구',
 		date: '2024-10-15',
 		time: '06:00',
 		type: 'upcoming',
 		location: 'Provo, UT',
-		attenders: [users[0], users[1], users[4]]
+		attenders: [users[0], users[4]] // Only group members
 	},
 	{
 		id: 5,
+		groupId: 3,
 		name: '다른거',
 		date: '2024-10-18',
 		time: '07:00',
 		type: 'upcoming',
 		location: 'Salt Lake City, UT',
-		attenders: [users[1], users[2]]
+		attenders: [] // No group members
 	},
 	{
 		id: 6,
+		groupId: 1,
 		name: '또다른거',
 		date: '2024-10-20',
 		time: '21:00',
 		type: 'upcoming',
 		location: 'Ogden, UT',
-		attenders: [users[2], users[3]]
+		attenders: [users[3]] // Only group members
 	},
 	{
 		id: 7,
+		groupId: 1,
 		name: 'Basketball Game',
 		date: '2024-11-01',
 		time: '18:00',
 		type: 'upcoming',
 		location: 'Provo, UT',
-		attenders: [users[0], users[4], users[5]]
+		attenders: [users[0], users[4]] // Only group members
 	},
 	{
 		id: 8,
+		groupId: 1,
 		name: 'Chess Tournament',
 		date: '2024-10-05',
 		time: '19:00',
 		type: 'upcoming',
 		location: 'Provo, UT',
-		attenders: [users[3], users[4], users[5]]
+		attenders: [users[3], users[4]] // Only group members
 	}
 ];
 
@@ -168,21 +174,10 @@ export const chats = [
 		]
 	},
 	{
-		groupId: 2,
-		messages: [{ sender: users[1].firstName, message: 'Anyone up for a game this weekend?' }]
-	},
-	{
 		groupId: 3,
 		messages: [
 			{ sender: users[2].firstName, message: 'Soccer practice tomorrow at 6pm.' },
 			{ sender: users[4].firstName, message: 'I will join!' }
-		]
-	},
-	{
-		groupId: 4,
-		messages: [
-			{ sender: users[3].firstName, message: 'Chess club meeting on Friday.' },
-			{ sender: users[5].firstName, message: 'Looking forward to it!' }
 		]
 	}
 ];
@@ -196,6 +191,3 @@ export const notifications = [
 	{ userId: 5, message: 'Your game is scheduled for tomorrow.' },
 	{ userId: 6, message: 'You have been added to the Chess Club group.' }
 ];
-
-// Example usage:
-// Import these data sets and use them within your components to display mock data in your SvelteKit project.
