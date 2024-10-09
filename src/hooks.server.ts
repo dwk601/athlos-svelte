@@ -1,3 +1,1 @@
-import { handle } from "./auth"
-
-console.log(handle)
+export { handle } from './auth'
