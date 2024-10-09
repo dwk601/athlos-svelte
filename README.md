@@ -2,16 +2,16 @@
 
 Athlos is a web application designed to streamline the management of soccer games and teams. Built with modern technologies, it aims to solve common issues faced by soccer enthusiasts who organize regular games.
 
-## Features
+## Roadmap
 
-- **Team Member Management**: Easily add, remove, and update team members.
-- **Check-in System**: Track player attendance for each game.
-- **Rating System**: Implement a fair team division based on player ratings.
-- **Upcoming Games**: View and manage scheduled matches.
-- **Recent Activities**: Keep track of past games and player performances.
-- **User Authentication**: Secure user authentication powered by Kinde Auth.
-- **Group Management**: Create and join groups for organizing games.
-- **Game Management**: Create and manage games within groups.
+- [ ] **Team Member Management**: Easily add, remove, and update team members.
+- [ ] **Check-in System**: Track player attendance for each game.
+- [ ] **Rating System**: Implement a fair team division based on player ratings.
+- [ ] **Upcoming Games**: View and manage scheduled matches.
+- [ ] **Recent Activities**: Keep track of past games and player performances.
+- [ ] **User Authentication**: Secure user authentication powered by Kinde Auth.
+- [ ] **Group Management**: Create and join groups for organizing games.
+- [ ] **Game Management**: Create and manage games within groups.
 
 ## Tech Stack
 
@@ -26,17 +26,20 @@ Athlos is a web application designed to streamline the management of soccer game
 ### Next.js Project
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/dwk601/athlos-svelte
    ```
 
 2. Install dependencies:
+
    ```bash
    cd athlos
    npm install
    ```
 
 3. Set up Supabase:
+
    - Create a Supabase project
    - Copy your Supabase URL and anon key
    - Create a `.env.local` file in the root directory and add your Supabase credentials:
@@ -46,6 +49,7 @@ Athlos is a web application designed to streamline the management of soccer game
      ```
 
 4. Set up Kinde Auth:
+
    - Create a Kinde account and set up your application
    - Add the following environment variables to your `.env.local` file:
      ```bash
@@ -58,6 +62,7 @@ Athlos is a web application designed to streamline the management of soccer game
      ```
 
 5. Run the development server:
+
    ```bash
    npm run dev
    ```
@@ -78,11 +83,13 @@ Athlos is a web application designed to streamline the management of soccer game
 Athlos includes several API routes to handle various functionalities:
 
 - **Groups**
+
   - `POST /api/groups/create`: Create a new group
   - `POST /api/groups/join`: Join an existing group
   - `GET /api/groups/list`: List all groups
 
 - **Games**
+
   - `POST /api/games/create`: Create a new game
   - `POST /api/games/attendees`: Manage game attendees
   - `GET /api/games/list`: List games for a specific group
