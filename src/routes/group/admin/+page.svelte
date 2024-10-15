@@ -1,1 +1,0 @@
-<!-- this should only available for the group admins -->
