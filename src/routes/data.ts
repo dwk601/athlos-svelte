@@ -1,193 +1,303 @@
-// data.ts
+import { v4 as uuidv4 } from 'uuid';
 
-// User roles
-export const roles = [
-	{ id: 1, name: 'Admin', label: 'Admin (Developer)', icon: 'shield' },
-	{ id: 2, name: 'User', icon: 'user' },
-	{ id: 3, name: 'Group Admin', label: 'Group Admin', icon: 'user-check' },
-	{ id: 4, name: 'Group Member', label: 'Group Member', icon: 'user' }
-];
-
-// Users
+// Users Table
 export const users = [
-	{
-		id: 1,
-		firstName: 'John',
-		lastName: 'Doe',
-		age: 25,
-		groupId: 1,
-		role: roles[2], // Group Admin
-		checkInStatus: 'checked in',
-		avatar: 'https://avatars.dicebear.com/api/avataaars/johndoe.svg'
-	},
-	{
-		id: 2,
-		firstName: 'Jane',
-		lastName: 'Smith',
-		age: 30,
-		groupId: 1,
-		role: roles[3], // Group Member
-		checkInStatus: 'not checked in',
-		avatar: 'https://avatars.dicebear.com/api/avataaars/janesmith.svg'
-	},
-	{
-		id: 3,
-		firstName: 'Mike',
-		lastName: 'Johnson',
-		age: 22,
-		groupId: null,
-		role: roles[1], // User
-		checkInStatus: 'not checked in',
-		avatar: 'https://avatars.dicebear.com/api/avataaars/mikejohnson.svg'
-	},
-	{
-		id: 4,
-		firstName: '동욱',
-		lastName: '김',
-		age: 25,
-		groupId: 1,
-		role: roles[3], // Group Member
-		checkInStatus: 'checked in',
-		avatar: 'https://avatars.dicebear.com/api/avataaars/dongwookkim.svg'
-	},
-	{
-		id: 5,
-		firstName: 'Alice',
-		lastName: 'Brown',
-		age: 28,
-		groupId: 3,
-		role: roles[3], // Group Member
-		checkInStatus: 'checked in',
-		avatar: 'https://avatars.dicebear.com/api/avataaars/alicebrown.svg'
-	},
-	{
-		id: 6,
-		firstName: 'Bob',
-		lastName: 'Davis',
-		age: 35,
-		groupId: 2,
-		role: roles[2], // User
-		checkInStatus: 'not checked in',
-		avatar: 'https://avatars.dicebear.com/api/avataaars/bobdavis.svg'
-	}
+    {
+        id: uuidv4(),
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+        password: 'hashed_password',
+    	created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        name: 'Jane Smith',
+        email: 'jane.smith@example.com',
+        password: 'hashed_password',
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        name: 'Mike Johnson',
+        email: 'mike.johnson@example.com',
+        password: 'hashed_password',
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        name: '동욱 김',
+        email: 'dongwook.kim@example.com',
+        password: 'hashed_password',
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        name: 'Alice Brown',
+        email: 'alice.brown@example.com',
+        password: 'hashed_password',
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        name: 'Bob Davis',
+        email: 'bob.davis@example.com',
+        password: 'hashed_password',
+        created_at: new Date(),
+        updated_at: new Date()
+    }
 ];
 
-// Groups
+// Groups Table
 export const groups = [
-	{ id: 1, name: 'Basketball Enthusiasts', createdBy: users[0].id },
-	{ id: 2, name: '느그리그', createdBy: users[1].id },
-	{ id: 3, name: 'Soccer Lovers', createdBy: users[2].id }
+    {
+        id: uuidv4(),
+        name: 'Basketball Enthusiasts',
+        description: 'A group for basketball lovers',
+        created_by: users[0].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        name: '느그리그',
+        description: 'A group for 느그리그 fans',
+        created_by: users[1].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        name: 'Soccer Lovers',
+        description: 'A group for soccer enthusiasts',
+        created_by: users[2].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    }
 ];
 
-// Games
+// GroupMembers Table
+export const groupMembers = [
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        user_id: users[0].id,
+        role: 'leader',
+        joined_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        user_id: users[1].id,
+        role: 'member',
+        joined_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        user_id: users[3].id,
+        role: 'member',
+        joined_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[1].id,
+        user_id: users[1].id,
+        role: 'leader',
+        joined_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[2].id,
+        user_id: users[2].id,
+        role: 'leader',
+        joined_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[2].id,
+        user_id: users[4].id,
+        role: 'member',
+        joined_at: new Date()
+    }
+];
+
+// Games Table
 export const games = [
-	{
-		id: 1,
-		groupId: 1,
-		name: '예전 축구',
-		date: '2024-08-15',
-		time: '06:00',
-		type: 'past',
-		location: 'Provo, UT',
-		attenders: [users[0], users[4]] // Only group members
-	},
-	{
-		id: 2,
-		groupId: 3,
-		name: '예전 다른거',
-		date: '2024-08-10',
-		time: '07:00',
-		type: 'past',
-		location: 'Provo, UT',
-		attenders: [] // No group members
-	},
-	{
-		id: 3,
-		groupId: 1,
-		name: '예전 또다른거',
-		date: '2024-08-05',
-		time: '21:00',
-		type: 'past',
-		location: 'Provo, UT',
-		attenders: [users[3]] // Only group members
-	},
-	{
-		id: 4,
-		groupId: 2,
-		name: '축구',
-		date: '2024-10-15',
-		time: '06:00',
-		type: 'upcoming',
-		location: 'Provo, UT',
-		attenders: [users[0], users[4]] // Only group members
-	},
-	{
-		id: 5,
-		groupId: 3,
-		name: '다른거',
-		date: '2024-10-18',
-		time: '07:00',
-		type: 'upcoming',
-		location: 'Salt Lake City, UT',
-		attenders: [] // No group members
-	},
-	{
-		id: 6,
-		groupId: 1,
-		name: '또다른거',
-		date: '2024-10-20',
-		time: '21:00',
-		type: 'upcoming',
-		location: 'Ogden, UT',
-		attenders: [users[3]] // Only group members
-	},
-	{
-		id: 7,
-		groupId: 1,
-		name: 'Basketball Game',
-		date: '2024-11-01',
-		time: '18:00',
-		type: 'upcoming',
-		location: 'Provo, UT',
-		attenders: [users[0], users[4]] // Only group members
-	},
-	{
-		id: 8,
-		groupId: 1,
-		name: 'Chess Tournament',
-		date: '2024-10-05',
-		time: '19:00',
-		type: 'upcoming',
-		location: 'Provo, UT',
-		attenders: [users[3], users[4]] // Only group members
-	}
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        date_time: new Date('2024-08-15T06:00:00'),
+        location: 'Provo, UT',
+        created_by: users[0].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[2].id,
+        date_time: new Date('2024-08-10T07:00:00'),
+        location: 'Provo, UT',
+        created_by: users[2].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        date_time: new Date('2024-08-05T21:00:00'),
+        location: 'Provo, UT',
+        created_by: users[3].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[1].id,
+        date_time: new Date('2024-10-15T06:00:00'),
+        location: 'Provo, UT',
+        created_by: users[0].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[2].id,
+        date_time: new Date('2024-10-18T07:00:00'),
+        location: 'Salt Lake City, UT',
+        created_by: users[2].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        date_time: new Date('2024-10-20T21:00:00'),
+        location: 'Ogden, UT',
+        created_by: users[3].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        date_time: new Date('2024-11-01T18:00:00'),
+        location: 'Provo, UT',
+        created_by: users[0].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        date_time: new Date('2024-10-05T19:00:00'),
+        location: 'Provo, UT',
+        created_by: users[3].id,
+        created_at: new Date(),
+        updated_at: new Date()
+    }
 ];
 
-// Chats
-export const chats = [
-	{
-		groupId: 1,
-		messages: [
-			{ sender: users[0].firstName, message: 'Hey team, game tonight at 7pm!' },
-			{ sender: users[1].firstName, message: 'Got it! See you there.' },
-			{ sender: users[4].firstName, message: 'I will be there too!' }
-		]
-	},
-	{
-		groupId: 3,
-		messages: [
-			{ sender: users[2].firstName, message: 'Soccer practice tomorrow at 6pm.' },
-			{ sender: users[4].firstName, message: 'I will join!' }
-		]
-	}
-];
-
-// Notifications
-export const notifications = [
-	{ userId: 1, message: 'You have 3 upcoming games.' },
-	{ userId: 2, message: 'Group "Soccer Lovers" created successfully.' },
-	{ userId: 3, message: 'Welcome to the platform!' },
-	{ userId: 4, message: 'You have a new message from the Chess Club.' },
-	{ userId: 5, message: 'Your game is scheduled for tomorrow.' },
-	{ userId: 6, message: 'You have been added to the Chess Club group.' }
+// GameAttendees Table
+export const gameAttendees = [
+    {
+        id: uuidv4(),
+        game_id: games[0].id,
+        user_id: users[0].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[0].id,
+        user_id: users[4].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[1].id,
+        user_id: users[2].id,
+        status: 'not_attending',
+        checked_in: false,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[2].id,
+        user_id: users[3].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[3].id,
+        user_id: users[0].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[3].id,
+        user_id: users[4].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[4].id,
+        user_id: users[2].id,
+        status: 'not_attending',
+        checked_in: false,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[5].id,
+        user_id: users[3].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[6].id,
+        user_id: users[0].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[6].id,
+        user_id: users[4].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[7].id,
+        user_id: users[3].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        game_id: games[7].id,
+        user_id: users[4].id,
+        status: 'attending',
+        checked_in: true,
+        updated_at: new Date()
+    }
 ];
