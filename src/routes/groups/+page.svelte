@@ -36,7 +36,7 @@
         : groups;
 
     function routeToPage(group: { id: any; name: any; }) {
-        goto(`/group/${group.id}?name=${encodeURIComponent(group.name)}`);
+        goto(`/groups/${group.id}`);
     }
 
     function redirectToCreateGroup() {
