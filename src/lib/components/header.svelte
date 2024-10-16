@@ -6,7 +6,7 @@
 <header class="bg-background text-foreground p-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center">
         <div class="flex items-center">
-            <a href="/dashboard">
+            <a href="/groups">
                 <img src={favicon} alt="Logo" class="h-8 w-auto mr-2" />
             </a>
         </div>
