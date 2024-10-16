@@ -55,7 +55,7 @@
                         <span>{member.name} - {member.role}</span>
                         {#if member.id !== group.created_by}
                             <!-- Don't allow removing the group creator -->
-                            <Button variant="ghost" size="icon" on:click={() => removeMember(member.id)}>
+                            <Button variant="ghost" size="icon" on:click={() => (member.id)}>
                                 <X class="h-4 w-4" />
                             </Button>
                         {/if}
@@ -88,7 +88,7 @@
                 {#each groupGames as game, index}
                     <li class="flex items-center justify-between">
                         <span>{new Date(game.date_time).toLocaleString()} at {game.location}</span>
-                        <Button variant="ghost" size="icon" on:click={() => removeGame(game.id)}>
+                        <Button variant="ghost" size="icon" on:click={() => (game.id)}>
                             <X class="h-4 w-4" />
                         </Button>
                     </li>
