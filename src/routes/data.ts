@@ -55,7 +55,7 @@ export const users = [
 // Groups Table
 export const groups = [
     {
-        id: uuidv4(),
+        id: 1,
         name: 'Basketball Enthusiasts',
         description: 'A group for basketball lovers',
         created_by: users[0].id,
@@ -63,7 +63,7 @@ export const groups = [
         updated_at: new Date()
     },
     {
-        id: uuidv4(),
+        id: 2,
         name: '느그리그',
         description: 'A group for 느그리그 fans',
         created_by: users[1].id,
@@ -71,7 +71,7 @@ export const groups = [
         updated_at: new Date()
     },
     {
-        id: uuidv4(),
+        id: 3,
         name: 'Soccer Lovers',
         description: 'A group for soccer enthusiasts',
         created_by: users[2].id,
