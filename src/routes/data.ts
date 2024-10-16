@@ -77,7 +77,7 @@ export const groups = [
         created_by: users[2].id,
         created_at: new Date(),
         updated_at: new Date()
-    }
+    },
 ];
 
 // GroupMembers Table
