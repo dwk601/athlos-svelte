@@ -13,10 +13,15 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 	import { Users, CalendarDays, Info } from 'lucide-svelte';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
 	const { group, members, upcomingGames } = data;
+
+	function editGroup() {
+        goto(`/groups/${group.id}/edit`);
+    }
 </script>
 
 <div class="container mx-auto px-4 py-8">
@@ -28,8 +33,9 @@
 		<CardContent>
 			<p class="text-sm text-muted-foreground">Members: {members.length}</p>
 		</CardContent>
-		<CardFooter>
+		<CardFooter class="flex justify-between">
 			<Button>Join Group</Button>
+			<Button on:click={editGroup}>Edit Group</Button>
 		</CardFooter>
 	</Card>
 
