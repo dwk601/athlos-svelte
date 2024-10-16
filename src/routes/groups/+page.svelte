@@ -3,7 +3,6 @@
     import { Button } from "$lib/components/ui/button";
     import { Input } from "$lib/components/ui/input";
     import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$lib/components/ui/card";
-    import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "$lib/components/ui/dialog";
     import { Avatar, AvatarFallback, AvatarImage } from "$lib/components/ui/avatar";
     import { Search, Plus } from "lucide-svelte";
     import { toast } from "svelte-sonner";
@@ -23,7 +22,7 @@
                 id: uuidv4(),
                 name: newGroupName,
                 description: '',
-                created_by: '', // Add appropriate user ID
+                created_by: '', 
                 created_at: new Date(),
                 updated_at: new Date()
             });
@@ -39,10 +38,14 @@
     function routeToPage(group: { id: any; name: any; }) {
         goto(`/group/${group.id}?name=${encodeURIComponent(group.name)}`);
     }
+
+    function redirectToCreateGroup() {
+        goto('/groups/create');
+    }
 </script>
 
 <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-6">My Groups</h1>
+    <h1 class="text-3xl font-bold mb-6">Groups</h1>
 
     <div class="mb-6 flex items-center">
         <Input type="text" placeholder="Search groups..." class="mr-2" bind:value={searchQuery} />
@@ -73,19 +76,5 @@
         {/each}
     </div>
 
-    <Dialog>
-        <DialogTrigger>
-            <Button><Plus class="mr-2 h-4 w-4" /> Create New Group</Button>
-        </DialogTrigger>
-        <DialogContent>
-            <DialogHeader>
-                <DialogTitle>Create a New Group</DialogTitle>
-                <DialogDescription>Enter a name for your new group. Click create when you're done.</DialogDescription>
-            </DialogHeader>
-            <Input type="text" placeholder="Group name" bind:value={newGroupName} />
-            <DialogFooter>
-                <Button on:click={createGroup}>Create Group</Button>
-            </DialogFooter>
-        </DialogContent>
-    </Dialog>
+    <Button on:click={redirectToCreateGroup} class="fixed bottom-4 right-4 w-full max-w-xs mx-auto"><Plus class="mr-2 h-4 w-4" /> Create New Group</Button>
 </div>
