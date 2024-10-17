@@ -20,8 +20,8 @@
 	const { group, members, upcomingGames } = data;
 
 	function editGroup() {
-        goto(`/groups/${group.id}/edit`);
-    }
+		goto(`/groups/${group.id}/edit`);
+	}
 </script>
 
 <div class="container mx-auto px-4 py-8">
@@ -93,6 +93,10 @@
 					<CardDescription>Scheduled events for the group</CardDescription>
 				</CardHeader>
 				<CardContent>
+					<div class="mb-4 flex items-center justify-between">
+						<h3 class="font-semibold">Scheduled events for the group</h3>
+						<Button>Create Game</Button>
+					</div>
 					<div class="space-y-4">
 						{#each upcomingGames as game, index}
 							<div class="flex items-center justify-between">
