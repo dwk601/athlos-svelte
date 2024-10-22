@@ -199,6 +199,15 @@ export const games = [
         created_by: users[3].id,
         created_at: new Date(),
         updated_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[0].id,
+        date_time: new Date('2024-10-21T18:00:00'),
+        location: 'Provo, UT',
+        created_by: users[3].id,
+        created_at: new Date(),
+        updated_at: new Date()
     }
 ];
 

@@ -1,5 +1,5 @@
-import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import { error, fail } from '@sveltejs/kit';
+import type { PageServerLoad, Actions } from './$types';
 import { games, gameAttendees, users } from '../../../../data';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -23,4 +23,40 @@ export const load: PageServerLoad = async ({ params }) => {
         game,
         attendees
     };
+};
+
+export const actions: Actions = {
+    checkIn: async ({ params, request }) => {
+        const game = games.find(g => g.id === params.gameId);
+        if (!game) {
+            return fail(404, { message: 'Game not found' });
+        }
+
+        const formData = await request.formData();
+        const userId = formData.get('userId') as string;
+
+        if (!userId) {
+            return fail(400, { message: 'User ID is required' });
+        }
+
+        const attendee = gameAttendees.find(a => a.game_id === game.id && a.user_id === userId);
+        if (!attendee) {
+            return fail(400, { message: 'User is not attending this game' });
+        }
+
+        // Check if it's the game day
+        const today = new Date();
+        const gameDate = new Date(game.date_time);
+        if (today.toDateString() !== gameDate.toDateString()) {
+            return fail(400, { message: 'Check-in is only available on the day of the game' });
+        }
+
+        // Update the attendee's checked_in status
+        attendee.checked_in = true;
+        attendee.updated_at = new Date();
+
+        console.log(`User ${userId} checked in for game ${game.id} at ${attendee.updated_at}`);
+
+        return { success: true };
+    }
 };
