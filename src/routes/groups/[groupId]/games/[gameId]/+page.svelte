@@ -5,10 +5,20 @@
     import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
     import { Avatar, AvatarFallback, AvatarImage } from '$lib/components/ui/avatar';
     import { MapPin, Calendar, Users } from 'lucide-svelte';
+    import * as AlertDialog from "$lib/components/ui/alert-dialog";
 
     export let data: PageData;
 
     const { game, attendees }: { game: any; attendees: any[] } = data;
+
+    // Function to check if the game is in the past
+    function isPastGame(gameDate: Date): boolean {
+        const now = new Date();
+        return gameDate < now;
+    }
+
+    // Check if it's a past game
+    $: isPast = isPastGame(new Date(game.date_time));
 
     // Function to check if the current date is the same as the game date
     function isGameDay(gameDate: Date): boolean {
@@ -31,6 +41,7 @@
     }
 
     let checkInError = '';
+    let showErrorDialog = false;
 
     function handleCheckInSubmit() {
         return async ({ result }: { result: { type: string; data?: { message?: string } } }) => {
@@ -40,6 +51,7 @@
             } else if (result.type === 'failure') {
                 console.error('Check-in failed:', result.data?.message);
                 checkInError = result.data?.message || 'Check-in failed';
+                showErrorDialog = true;
             }
         };
     }
@@ -81,20 +93,40 @@
             </div>
         </CardContent>
         <CardFooter class="flex justify-between">
-            <Button on:click={handleAttend}>Attend Game</Button>
+            <form method="POST" action="?/attendGame" use:enhance>
+                <input type="hidden" name="userId" value={currentUserId} />
+                <Button 
+                    type="submit"
+                    disabled={isPast}
+                    class={isPast ? 'opacity-50 cursor-not-allowed' : ''}
+                >
+                    {isPast ? 'Game Ended' : 'Attend Game'}
+                </Button>
+            </form>
             <form method="POST" action="?/checkIn" use:enhance={handleCheckInSubmit}>
                 <input type="hidden" name="userId" value={currentUserId} />
                 <Button 
                     type="submit"
-                    disabled={!isToday || isCheckedIn}
-                    class={(!isToday || isCheckedIn) ? 'opacity-50 cursor-not-allowed' : ''}
+                    disabled={!isToday || isCheckedIn || isPast}
+                    class={(!isToday || isCheckedIn || isPast) ? 'opacity-50 cursor-not-allowed' : ''}
                 >
-                    {isCheckedIn ? 'Checked In' : 'Check In'}
+                    {isCheckedIn ? 'Checked In' : (isPast ? 'Game Ended' : 'Check In')}
                 </Button>
             </form>
         </CardFooter>
     </Card>
-    {#if checkInError}
-        <p class="text-red-500 mt-2">{checkInError}</p>
-    {/if}
+
+    <AlertDialog.Root bind:open={showErrorDialog}>
+        <AlertDialog.Content>
+            <AlertDialog.Header>
+                <AlertDialog.Title>Check-in Error</AlertDialog.Title>
+                <AlertDialog.Description>
+                    {checkInError}
+                </AlertDialog.Description>
+            </AlertDialog.Header>
+            <AlertDialog.Footer>
+                <AlertDialog.Action on:click={() => showErrorDialog = false}>Close</AlertDialog.Action>
+            </AlertDialog.Footer>
+        </AlertDialog.Content>
+    </AlertDialog.Root>
 </div>

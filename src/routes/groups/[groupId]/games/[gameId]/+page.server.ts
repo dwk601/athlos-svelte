@@ -26,6 +26,47 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions: Actions = {
+    attendGame: async ({ params, request }) => {
+        const game = games.find(g => g.id === params.gameId);
+        if (!game) {
+            return fail(404, { message: 'Game not found' });
+        }
+
+        const formData = await request.formData();
+        const userId = formData.get('userId') as string;
+
+        if (!userId) {
+            return fail(400, { message: 'User ID is required' });
+        }
+
+        // Check if the game is in the past
+        const now = new Date();
+        const gameDate = new Date(game.date_time);
+        if (gameDate < now) {
+            return fail(400, { message: 'Cannot attend a past game' });
+        }
+
+        // Check if the user is already attending
+        const existingAttendee = gameAttendees.find(a => a.game_id === game.id && a.user_id === userId);
+        if (existingAttendee) {
+            return fail(400, { message: 'User is already attending this game' });
+        }
+
+        // Add the user to the attendees list
+        gameAttendees.push({
+            game_id: game.id,
+            user_id: userId,
+            status: 'attending',
+            checked_in: false,
+            created_at: new Date(),
+            updated_at: new Date()
+        });
+
+        console.log(`User ${userId} is now attending game ${game.id}`);
+
+        return { success: true };
+    },
+
     checkIn: async ({ params, request }) => {
         const game = games.find(g => g.id === params.gameId);
         if (!game) {
