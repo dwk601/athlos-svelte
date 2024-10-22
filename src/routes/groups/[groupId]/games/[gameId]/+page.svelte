@@ -7,7 +7,7 @@
 
     export let data: PageData;
 
-    const { game, attendees } = data;
+    const { game, attendees }: { game: any; attendees: any[] } = data;
 
     function handleAttend() {
         // Add your attend logic here
