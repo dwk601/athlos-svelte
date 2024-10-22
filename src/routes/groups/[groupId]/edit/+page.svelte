@@ -24,7 +24,7 @@
     $: availableUsers = allUsers.filter((user) => !members.some((member) => member.id === user.id));
 </script>
 
-<div class="container mx-auto p-4 space-y-8">
+<div class="container mx-auto p-4 space-y-8 max-w-3xl">
     <Card>
         <CardHeader>
             <CardTitle>Edit Group</CardTitle>

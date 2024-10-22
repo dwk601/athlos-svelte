@@ -43,7 +43,7 @@
     }
 </script>
 
-<div class="container mx-auto p-4 max-w-md">
+<div class="container mx-auto p-4 max-w-3xl">
     <h1 class="text-2xl font-bold mb-4">Create a New Group</h1>
 
     <form on:submit|preventDefault={createGroup} class="space-y-4">
