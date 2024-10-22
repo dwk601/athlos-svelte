@@ -35,9 +35,8 @@
     // Check if the current user is already checked in
     $: isCheckedIn = attendees.some(a => a.user_id === currentUserId && a.checked_in);
 
-    function handleAttend() {
-        // Add your attend logic here
-        console.log(`Attending game ${game.id}`);
+    function handleAttend(event: Event, gameId: string) {
+        console.log(`Attempting to attend game ${gameId}`);
     }
 
     let checkInError = '';
@@ -57,7 +56,7 @@
     }
 </script>
 
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8 max-w-3xl">
     <Card>
         <CardHeader>
             <CardTitle>Game Details</CardTitle>
@@ -96,9 +95,10 @@
             <form method="POST" action="?/attendGame" use:enhance>
                 <input type="hidden" name="userId" value={currentUserId} />
                 <Button 
-                    type="submit"
+                    
                     disabled={isPast}
                     class={isPast ? 'opacity-50 cursor-not-allowed' : ''}
+                    on:click={(event) => handleAttend(event, game.id)}
                 >
                     {isPast ? 'Game Ended' : 'Attend Game'}
                 </Button>
@@ -106,7 +106,7 @@
             <form method="POST" action="?/checkIn" use:enhance={handleCheckInSubmit}>
                 <input type="hidden" name="userId" value={currentUserId} />
                 <Button 
-                    type="submit"
+                    
                     disabled={!isToday || isCheckedIn || isPast}
                     class={(!isToday || isCheckedIn || isPast) ? 'opacity-50 cursor-not-allowed' : ''}
                 >

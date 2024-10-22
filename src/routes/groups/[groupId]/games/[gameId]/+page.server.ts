@@ -1,4 +1,4 @@
-import { error, fail } from '@sveltejs/kit';
+import { error, fail, json } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import { games, gameAttendees, users } from '../../../../data';
 
@@ -29,27 +29,27 @@ export const actions: Actions = {
     attendGame: async ({ params, request }) => {
         const game = games.find(g => g.id === params.gameId);
         if (!game) {
-            return fail(404, { message: 'Game not found' });
+            return json({ message: 'Game not found' }, { status: 404 });
         }
 
         const formData = await request.formData();
         const userId = formData.get('userId') as string;
 
         if (!userId) {
-            return fail(400, { message: 'User ID is required' });
+            return json({ message: 'User ID is required' }, { status: 400 });
         }
 
         // Check if the game is in the past
         const now = new Date();
         const gameDate = new Date(game.date_time);
         if (gameDate < now) {
-            return fail(400, { message: 'Cannot attend a past game' });
+            return json({ message: 'Cannot attend a past game' }, { status: 400 });
         }
 
         // Check if the user is already attending
         const existingAttendee = gameAttendees.find(a => a.game_id === game.id && a.user_id === userId);
         if (existingAttendee) {
-            return fail(400, { message: 'User is already attending this game' });
+            return json({ message: 'User is already attending this game' }, { status: 400 });
         }
 
         // Add the user to the attendees list
@@ -64,7 +64,7 @@ export const actions: Actions = {
 
         console.log(`User ${userId} is now attending game ${game.id}`);
 
-        return { success: true };
+        return json({ success: true });
     },
 
     checkIn: async ({ params, request }) => {
