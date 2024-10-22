@@ -17,7 +17,7 @@
 
 	export let data: PageData;
 
-	const { group, members, upcomingGames } = data;
+	const { group, members, allGames } = data;
 
 	function editGroup() {
 		goto(`/groups/${group.id}/edit`);
@@ -32,6 +32,15 @@
 		// Add your attend logic here
 		console.log(`Attending game ${gameId}`);
 	}
+
+	// Function to determine if a game is in the past
+	function isPastGame(gameDate: string): boolean {
+		return new Date(gameDate) < new Date();
+	}
+
+	// Separate games into upcoming and past
+	$: upcomingGames = allGames.filter((game) => !isPastGame(game.date_time));
+	$: pastGames = allGames.filter((game) => isPastGame(game.date_time)).reverse();
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-3xl">
@@ -62,14 +71,6 @@
 				</CardHeader>
 				<CardContent>
 					<p>{group.description}</p>
-					<!-- {#if group.rules}
-                        <h3 class="mt-4 font-semibold">Group Rules:</h3>
-                        <ul class="list-disc pl-5">
-                            {#each group.rules as rule}
-                                <li>{rule}</li>
-                            {/each}
-                        </ul>
-                    {/if} -->
 				</CardContent>
 			</Card>
 		</TabsContent>
@@ -85,10 +86,11 @@
 							<div class="flex items-center space-x-4">
 								<Avatar>
 									<AvatarImage alt={member.name} />
-									<AvatarFallback></AvatarFallback>
+									<AvatarFallback>{(member.name ?? '').charAt(0)}</AvatarFallback>
 								</Avatar>
 								<div>
 									<p class="text-sm font-medium">{member.name}</p>
+									<p class="text-xs text-muted-foreground">{member.role}</p>
 								</div>
 							</div>
 						{/each}
@@ -104,31 +106,62 @@
 				</CardHeader>
 				<CardContent>
 					<div class="space-y-4">
-						{#each upcomingGames as game, index}
-							<div class="flex items-center justify-between">
-								<button
-									class="flex-1 text-left"
-									on:click={() => goToGame(game.id)}
-									on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
-									aria-label={`Go to game at ${game.location}`}
-								>
-									<h3 class="font-semibold">{game.location}</h3>
-									<p class="text-sm text-muted-foreground">
-										Date: {new Date(game.date_time).toLocaleString()}
-									</p>
-								</button>
-								<Button
-									variant="outline"
-									size="sm"
-									on:click={(event) => handleAttend(event, game.id)}
-								>
-									Attend
-								</Button>
-							</div>
-							{#if index !== upcomingGames.length - 1}
-								<Separator class="my-2" />
-							{/if}
-						{/each}
+						{#if upcomingGames.length > 0}
+							<h3 class="font-semibold text-lg">Upcoming Games</h3>
+							{#each upcomingGames as game, index}
+								<div class="flex items-center justify-between">
+									<button
+										class="flex-1 text-left"
+										on:click={() => goToGame(game.id)}
+										on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
+										aria-label={`Go to game at ${game.location}`}
+									>
+										<h4 class="font-semibold">{game.location}</h4>
+										<p class="text-sm text-muted-foreground">
+											Date: {new Date(game.date_time).toLocaleString()}
+										</p>
+										<p class="text-xs text-muted-foreground">
+											Attending: {game.attending} / {game.attendees}
+										</p>
+									</button>
+									<Button
+										variant="outline"
+										size="sm"
+										on:click={(event) => handleAttend(event, game.id)}
+									>
+										Attend
+									</Button>
+								</div>
+								{#if index !== upcomingGames.length - 1}
+									<Separator class="my-2" />
+								{/if}
+							{/each}
+						{/if}
+						
+						{#if pastGames.length > 0}
+							<h3 class="font-semibold text-lg mt-6">Past Games</h3>
+							{#each pastGames as game, index}
+								<div class="flex items-center justify-between opacity-60">
+									<button
+										class="flex-1 text-left"
+										on:click={() => goToGame(game.id)}
+										on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
+										aria-label={`Go to past game at ${game.location}`}
+									>
+										<h4 class="font-semibold">{game.location}</h4>
+										<p class="text-sm text-muted-foreground">
+											Date: {new Date(game.date_time).toLocaleString()}
+										</p>
+										<p class="text-xs text-muted-foreground">
+											Attended: {game.attending} / {game.attendees}
+										</p>
+									</button>
+								</div>
+								{#if index !== pastGames.length - 1}
+									<Separator class="my-2" />
+								{/if}
+							{/each}
+						{/if}
 					</div>
 				</CardContent>
 			</Card>

@@ -1,6 +1,6 @@
 // routes/groups/[groupId]/+page.server.ts
 import type { PageServerLoad } from './$types';
-import { groups, groupMembers, users, games } from '../../data';
+import { groups, groupMembers, users, games, gameAttendees } from '../../data';
 import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -29,17 +29,23 @@ export const load: PageServerLoad = async ({ params }) => {
             };
         });
 
-    // Fetch upcoming games for the group
-    const upcomingGames = games
+    // Fetch all games for the group and include attendance information
+    const allGames = games
         .filter((game) => game.group_id === groupIdNumber)
-        .map((game) => ({
-            ...game,
-            date_time: game.date_time.toISOString() // Convert Date to ISO string
-        }));
+        .map((game) => {
+            const attendees = gameAttendees.filter((ga) => ga.game_id === game.id);
+            return {
+                ...game,
+                date_time: game.date_time.toISOString(),
+                attendees: attendees.length,
+                attending: attendees.filter((a) => a.status === 'attending').length
+            };
+        })
+        .sort((a, b) => new Date(a.date_time).getTime() - new Date(b.date_time).getTime());
 
     return {
         group,
         members,
-        upcomingGames
+        allGames
     };
 };
