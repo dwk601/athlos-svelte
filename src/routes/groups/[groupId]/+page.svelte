@@ -105,25 +105,25 @@
 				<CardContent>
 					<div class="space-y-4">
 						{#each upcomingGames as game, index}
-							<div
-								class="flex cursor-pointer items-center justify-between"
-								on:click={() => goToGame(game.id)}
-							>
-								<div>
+							<div class="flex items-center justify-between">
+								<button
+									class="flex-1 text-left"
+									on:click={() => goToGame(game.id)}
+									on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
+									aria-label={`Go to game at ${game.location}`}
+								>
 									<h3 class="font-semibold">{game.location}</h3>
 									<p class="text-sm text-muted-foreground">
 										Date: {new Date(game.date_time).toLocaleString()}
 									</p>
-								</div>
-								<div class="text-right">
-									<Button
-										variant="outline"
-										size="sm"
-										on:click={(event) => handleAttend(event, game.id)}
-									>
-										Attend
-									</Button>
-								</div>
+								</button>
+								<Button
+									variant="outline"
+									size="sm"
+									on:click={(event) => handleAttend(event, game.id)}
+								>
+									Attend
+								</Button>
 							</div>
 							{#if index !== upcomingGames.length - 1}
 								<Separator class="my-2" />
