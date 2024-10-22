@@ -22,6 +22,16 @@
 	function editGroup() {
 		goto(`/groups/${group.id}/edit`);
 	}
+
+	function goToGame(gameId: string) {
+		goto(`/groups/${group.id}/games/${gameId}`);
+	}
+
+	function handleAttend(event: Event, gameId: string) {
+		event.stopPropagation();
+		// Add your attend logic here
+		console.log(`Attending game ${gameId}`);
+	}
 </script>
 
 <div class="container mx-auto px-4 py-8">
@@ -93,13 +103,12 @@
 					<CardDescription>Scheduled events for the group</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<div class="mb-4 flex items-center justify-between">
-						<h3 class="font-semibold">Scheduled events for the group</h3>
-						<Button>Create Game</Button>
-					</div>
 					<div class="space-y-4">
 						{#each upcomingGames as game, index}
-							<div class="flex items-center justify-between">
+							<div
+								class="flex cursor-pointer items-center justify-between"
+								on:click={() => goToGame(game.id)}
+							>
 								<div>
 									<h3 class="font-semibold">{game.location}</h3>
 									<p class="text-sm text-muted-foreground">
@@ -107,7 +116,13 @@
 									</p>
 								</div>
 								<div class="text-right">
-									<Button variant="outline" size="sm">Join</Button>
+									<Button
+										variant="outline"
+										size="sm"
+										on:click={(event) => handleAttend(event, game.id)}
+									>
+										Attend
+									</Button>
 								</div>
 							</div>
 							{#if index !== upcomingGames.length - 1}
