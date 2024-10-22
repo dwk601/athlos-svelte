@@ -65,7 +65,7 @@
         {/each}
     </div>
 
-    <Button on:click={redirectToCreateGroup} class="fixed bottom-4 right-4 mx-auto w-full max-w-xs"
+    <Button on:click={redirectToCreateGroup} class="fixed bottom-4 right-4 mx-auto w-48"
         ><Plus class="mr-2 h-4 w-4" /> Create New Group</Button
     >
 </div>
