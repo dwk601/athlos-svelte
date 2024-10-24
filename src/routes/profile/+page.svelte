@@ -3,14 +3,24 @@
   import { Avatar, AvatarFallback, AvatarImage } from "$lib/components/ui/avatar";
   import { Button } from "$lib/components/ui/button";
   import { Badge } from "$lib/components/ui/badge";
+  import { onMount } from 'svelte';
+  import { gsap } from 'gsap';
 
   export let data;
 
   const { user, userGroups, userGames, userAttendance } = data;
+
+  onMount(() => {
+    const sections = document.querySelectorAll('.section');
+    gsap.fromTo(sections, 
+      { opacity: 0, y: -20 }, 
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.2 }
+    );
+  });
 </script>
 
 <div class="container mx-auto p-4">
-  <Card class="w-full max-w-3xl mx-auto">
+  <Card class="w-full max-w-3xl mx-auto section">
     <CardHeader>
       <div class="flex items-center space-x-4">
         <Avatar class="w-20 h-20">

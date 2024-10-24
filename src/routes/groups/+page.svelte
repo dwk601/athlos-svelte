@@ -14,6 +14,8 @@
     import { Search, Plus } from 'lucide-svelte';
     import { toast } from 'svelte-sonner';
     import { groups } from '../data';
+    import { onMount } from 'svelte';
+    import { gsap } from 'gsap';
 
     let searchQuery = '';
     let newGroupName = '';
@@ -29,6 +31,15 @@
     function redirectToCreateGroup() {
         goto('/groups/create');
     }
+
+    onMount(() => {
+        gsap.from('.group-card', {
+            opacity: 0,
+            y: 50,
+            duration: 0.5,
+            stagger: 0.2
+        });
+    });
 </script>
 
 <div class="container mx-auto p-4">
@@ -41,7 +52,7 @@
 
     <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {#each filteredGroups as group (group.id)}
-            <Card>
+            <Card class="group-card">
                 <CardHeader>
                     <CardTitle>{group.name}</CardTitle>
                     <CardDescription>{group.description}</CardDescription>

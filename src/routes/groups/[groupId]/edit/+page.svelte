@@ -16,6 +16,8 @@
     import { CalendarIcon } from 'lucide-svelte';
     import { cn } from "$lib/utils";
     import { Clock } from 'lucide-svelte';
+    import { onMount } from 'svelte';
+    import { gsap } from 'gsap';
 
     export let data: PageData;
 
@@ -45,10 +47,18 @@
         });
         // TODO: Implement the actual game addition logic
     }
+
+    onMount(() => {
+        const sections = document.querySelectorAll('.card');
+        gsap.fromTo(sections, 
+            { opacity: 0, y: -20 }, 
+            { opacity: 1, y: 0, duration: 0.6, stagger: 0.2 }
+        );
+    });
 </script>
 
 <div class="container mx-auto p-4 space-y-8 max-w-3xl">
-    <Card>
+    <Card class="card">
         <CardHeader>
             <CardTitle>Edit Group</CardTitle>
         </CardHeader>
@@ -67,7 +77,7 @@
         </CardContent>
     </Card>
 
-    <Card>
+    <Card class="card">
         <CardHeader>
             <CardTitle>Edit Members</CardTitle>
         </CardHeader>
@@ -102,7 +112,7 @@
         </CardContent>
     </Card>
 
-    <Card>
+    <Card class="card">
         <CardHeader>
             <CardTitle>Edit Games</CardTitle>
         </CardHeader>

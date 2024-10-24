@@ -15,6 +15,7 @@
 	import { Users, CalendarDays, Info } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { gsap } from 'gsap';
+	import { onMount } from 'svelte';
 
 	export let data: PageData;
 
@@ -49,10 +50,18 @@
 			gsap.fromTo(content, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
 		}
 	}
+
+	onMount(() => {
+		const sections = document.querySelectorAll('.section');
+		gsap.fromTo(sections, 
+			{ opacity: 0, y: 20 }, 
+			{ opacity: 1, y: 0, duration: 0.6, stagger: 0.2 }
+		);
+	});
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-3xl">
-	<Card class="mb-8">
+	<Card class="mb-8 section">
 		<CardHeader>
 			<CardTitle>{group.name}</CardTitle>
 			<CardDescription>{group.description}</CardDescription>
@@ -66,7 +75,7 @@
 		</CardFooter>
 	</Card>
 
-	<Tabs value="info" class="w-full">
+	<Tabs value="info" class="w-full section">
 		<TabsList class="grid w-full grid-cols-3">
 			<TabsTrigger value="info" on:click={() => animateTabContent('info')}>
 				<Info class="mr-2 h-4 w-4" />Info

@@ -6,6 +6,8 @@
     import { Avatar, AvatarFallback, AvatarImage } from '$lib/components/ui/avatar';
     import { MapPin, Calendar, Users } from 'lucide-svelte';
     import * as AlertDialog from "$lib/components/ui/alert-dialog";
+    import { onMount } from 'svelte';
+    import { gsap } from 'gsap';
 
     export let data: PageData;
 
@@ -54,10 +56,18 @@
             }
         };
     }
+
+    onMount(() => {
+        const sections = document.querySelectorAll('.section');
+        gsap.fromTo(sections, 
+            { opacity: 0, y: -20 }, 
+            { opacity: 1, y: 0, duration: 0.6, stagger: 0.2 }
+        );
+    });
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-3xl">
-    <Card>
+    <Card class="section">
         <CardHeader>
             <CardTitle>Game Details</CardTitle>
             <CardDescription>

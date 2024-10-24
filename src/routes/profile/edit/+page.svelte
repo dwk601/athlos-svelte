@@ -5,6 +5,8 @@
   import { Label } from "$lib/components/ui/label";
   import { Avatar, AvatarImage, AvatarFallback } from "$lib/components/ui/avatar";
   import { enhance } from "$app/forms";
+  import { onMount } from 'svelte';
+  import { gsap } from 'gsap';
 
   export let data: { user: { name: string; email: string; icon: string } };
 
@@ -34,17 +36,25 @@
       .join('')
       .toUpperCase();
   }
+
+  onMount(() => {
+    const sections = document.querySelectorAll('.section');
+    gsap.fromTo(sections, 
+      { opacity: 0, y: -20 }, 
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.2 }
+    );
+  });
 </script>
 
 <div class="container mx-auto p-4">
-  <Card class="w-full max-w-3xl mx-auto">
+  <Card class="w-full max-w-3xl mx-auto section">
     <CardHeader>
       <CardTitle>Edit Profile</CardTitle>
     </CardHeader>
     <CardContent>
       <form method="POST" use:enhance={handleSubmit} enctype="multipart/form-data">
         <div class="space-y-6">
-          <div class="flex flex-col items-center space-y-4">
+          <div class="flex flex-col items-center space-y-4 section">
             <Avatar class="w-32 h-32">
               <AvatarImage src={iconPreview} alt={user.name} />
               <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
@@ -56,16 +66,16 @@
               </Label>
             </div>
           </div>
-          <div class="max-w-md mx-auto w-full">
+          <div class="max-w-md mx-auto w-full section">
             <Label for="name">Name</Label>
             <Input type="text" id="name" name="name" value={user.name} required />
           </div>
-          <div class="max-w-md mx-auto w-full">
+          <div class="max-w-md mx-auto w-full section">
             <Label for="email">Email</Label>
             <Input type="email" id="email" name="email" value={user.email} required />
           </div>
         </div>
-        <CardFooter class="px-0 pt-6">
+        <CardFooter class="px-0 pt-6 section">
           <Button type="submit" class="w-full max-w-md mx-auto">Save Changes</Button>
         </CardFooter>
       </form>
