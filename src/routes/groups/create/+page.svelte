@@ -25,7 +25,7 @@
 
         // Add the new group to the groups array
         groups.push({
-            id: uuidv4(),
+            id: Date.now(), // Use a numeric ID based on the current timestamp
             name,
             description,
             created_by: '', // Add appropriate user ID

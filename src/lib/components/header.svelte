@@ -10,7 +10,7 @@
 	import { User } from 'lucide-svelte';
 
 	// Placeholder for auth state
-	let isLoggedIn = true; // Change this to false to see the Login/Sign Up buttons
+	let isLoggedIn = false; // Change this to false to see the Login/Sign Up buttons
 </script>
 
 <header class="bg-background p-4 text-foreground shadow-md">
@@ -36,8 +36,12 @@
 					</DropdownMenuContent>
 				</DropdownMenu>
 			{:else}
-				<Button variant="outline">Login</Button>
-				<Button>Sign Up</Button>
+				<Button variant="outline">
+					<a href="/api/auth/login">Login</a>
+				</Button>
+				<Button>
+					<a href="/api/auth/register">Sign Up</a>
+				</Button>
 			{/if}
 		</div>
 	</div>
