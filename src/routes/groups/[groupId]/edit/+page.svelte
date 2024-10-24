@@ -15,6 +15,7 @@
     import { DateFormatter, type DateValue, getLocalTimeZone } from "@internationalized/date";
     import { CalendarIcon } from 'lucide-svelte';
     import { cn } from "$lib/utils";
+    import { Clock } from 'lucide-svelte';
 
     export let data: PageData;
 
@@ -34,6 +35,7 @@
 
     let selectedDate: DateValue | undefined = undefined;
     let location = '';
+    let selectedTime = '';
 </script>
 
 <div class="container mx-auto p-4 space-y-8 max-w-3xl">
@@ -127,6 +129,10 @@
                             <Calendar bind:value={selectedDate} initialFocus />
                         </Popover.Content>
                     </Popover.Root>
+                    <div class="flex items-center space-x-2">
+                        <Clock class="h-4 w-4" />
+                        <Input type="time" id="time" bind:value={selectedTime} aria-label="Choose time" class="w-[150px]" />
+                    </div>
                 </div>
                 <div class="flex items-center space-x-2">
                     <CircleAlert class="h-4 w-4" />
