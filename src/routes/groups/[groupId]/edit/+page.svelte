@@ -10,6 +10,11 @@
     import { Label } from '$lib/components/ui/label';
     import { Separator } from '$lib/components/ui/separator';
     import { CircleAlert, Plus, X } from 'lucide-svelte';
+    import { Calendar } from '$lib/components/ui/calendar';
+    import * as Popover from '$lib/components/ui/popover';
+    import { DateFormatter, type DateValue, getLocalTimeZone } from "@internationalized/date";
+    import { CalendarIcon } from 'lucide-svelte';
+    import { cn } from "$lib/utils";
 
     export let data: PageData;
 
@@ -22,6 +27,13 @@
     // For adding members
     let newMemberId = '';
     $: availableUsers = allUsers.filter((user) => !members.some((member) => member.id === user.id));
+
+    const df = new DateFormatter("en-US", {
+        dateStyle: "long"
+    });
+
+    let selectedDate: DateValue | undefined = undefined;
+    let location = '';
 </script>
 
 <div class="container mx-auto p-4 space-y-8 max-w-3xl">
@@ -97,12 +109,28 @@
             <Separator class="my-4" />
             <div class="space-y-4">
                 <div class="flex items-center space-x-2">
-                    <CircleAlert class="h-4 w-4" />
-                    <Input type="datetime-local" placeholder="Date & Time" />
+                    <Popover.Root>
+                        <Popover.Trigger asChild let:builder>
+                            <Button
+                                variant="outline"
+                                class={cn(
+                                    "w-[280px] justify-start text-left font-normal",
+                                    !selectedDate && "text-muted-foreground"
+                                )}
+                                builders={[builder]}
+                            >
+                                <CalendarIcon class="mr-2 h-4 w-4" />
+                                {selectedDate ? df.format(selectedDate.toDate(getLocalTimeZone())) : "Pick a date"}
+                            </Button>
+                        </Popover.Trigger>
+                        <Popover.Content class="w-auto p-0">
+                            <Calendar bind:value={selectedDate} initialFocus />
+                        </Popover.Content>
+                    </Popover.Root>
                 </div>
                 <div class="flex items-center space-x-2">
                     <CircleAlert class="h-4 w-4" />
-                    <Input placeholder="Location" />
+                    <Input bind:value={location} placeholder="Location" />
                 </div>
                 <Button>
                     <Plus class="mr-2 h-4 w-4" /> Add Game
