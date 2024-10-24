@@ -7,7 +7,7 @@
 	import { afterNavigate } from '$app/navigation';
 
 	function animate() {
-		gsap.from('main', { opacity: 0, scale: 0.95, duration: 0.3, ease: 'linear' });
+		gsap.from('main', { opacity: 0.5, scale: 0.95, duration: 0.3, ease: 'linear' });
 	}
 
 	onMount(() => {
