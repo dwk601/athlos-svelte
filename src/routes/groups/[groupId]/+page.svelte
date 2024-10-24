@@ -46,7 +46,7 @@
 	function animateTabContent(tabValue: string) {
 		const content = document.querySelector(`.tab-content-${tabValue}`);
 		if (content) {
-			gsap.fromTo(content, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 });
+			gsap.fromTo(content, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
 		}
 	}
 </script>
