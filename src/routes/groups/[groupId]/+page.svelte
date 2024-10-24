@@ -7,13 +7,14 @@
 		CardContent,
 		CardDescription,
 		CardFooter,
-		CardHeader,
-		CardTitle
+			CardHeader,
+			CardTitle
 	} from '$lib/components/ui/card';
 	import { Separator } from '$lib/components/ui/separator';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 	import { Users, CalendarDays, Info } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
+	import { gsap } from 'gsap';
 
 	export let data: PageData;
 
@@ -41,6 +42,13 @@
 	// Separate games into upcoming and past
 	$: upcomingGames = allGames.filter((game) => !isPastGame(game.date_time));
 	$: pastGames = allGames.filter((game) => isPastGame(game.date_time)).reverse();
+
+	function animateTabContent(tabValue: string) {
+		const content = document.querySelector(`.tab-content-${tabValue}`);
+		if (content) {
+			gsap.fromTo(content, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 });
+		}
+	}
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-3xl">
@@ -60,11 +68,17 @@
 
 	<Tabs value="info" class="w-full">
 		<TabsList class="grid w-full grid-cols-3">
-			<TabsTrigger value="info"><Info class="mr-2 h-4 w-4" />Info</TabsTrigger>
-			<TabsTrigger value="members"><Users class="mr-2 h-4 w-4" />Members</TabsTrigger>
-			<TabsTrigger value="games"><CalendarDays class="mr-2 h-4 w-4" />Games</TabsTrigger>
+			<TabsTrigger value="info" on:click={() => animateTabContent('info')}>
+				<Info class="mr-2 h-4 w-4" />Info
+			</TabsTrigger>
+			<TabsTrigger value="members" on:click={() => animateTabContent('members')}>
+				<Users class="mr-2 h-4 w-4" />Members
+			</TabsTrigger>
+			<TabsTrigger value="games" on:click={() => animateTabContent('games')}>
+				<CalendarDays class="mr-2 h-4 w-4" />Games
+			</TabsTrigger>
 		</TabsList>
-		<TabsContent value="info">
+		<TabsContent value="info" class="tab-content-info">
 			<Card>
 				<CardHeader>
 					<CardTitle>Group Information</CardTitle>
@@ -74,7 +88,7 @@
 				</CardContent>
 			</Card>
 		</TabsContent>
-		<TabsContent value="members">
+		<TabsContent value="members" class="tab-content-members">
 			<Card>
 				<CardHeader>
 					<CardTitle>Members</CardTitle>
@@ -98,72 +112,72 @@
 				</CardContent>
 			</Card>
 		</TabsContent>
-		<TabsContent value="games">
+		<TabsContent value="games" class="tab-content-games">
 			<Card>
 				<CardHeader>
 					<CardTitle>Games</CardTitle>
 					<CardDescription>Scheduled events for the group</CardDescription>
+					<CardContent>
+						<div class="space-y-4">
+							{#if upcomingGames.length > 0}
+								<h3 class="font-semibold text-lg">Upcoming Games</h3>
+								{#each upcomingGames as game, index}
+									<div class="flex items-center justify-between">
+										<button
+											class="flex-1 text-left"
+											on:click={() => goToGame(game.id)}
+											on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
+											aria-label={`Go to game at ${game.location}`}
+										>
+											<h4 class="font-semibold">{game.location}</h4>
+											<p class="text-sm text-muted-foreground">
+												Date: {new Date(game.date_time).toLocaleString()}
+											</p>
+											<p class="text-xs text-muted-foreground">
+												Attending: {game.attending} / {game.attendees}
+											</p>
+										</button>
+										<Button
+											variant="outline"
+											size="sm"
+											on:click={(event) => handleAttend(event, game.id)}
+										>
+											Attend
+										</Button>
+									</div>
+									{#if index !== upcomingGames.length - 1}
+										<Separator class="my-2" />
+									{/if}
+								{/each}
+							{/if}
+							
+							{#if pastGames.length > 0}
+								<h3 class="font-semibold text-lg mt-6">Past Games</h3>
+								{#each pastGames as game, index}
+									<div class="flex items-center justify-between opacity-60">
+										<button
+											class="flex-1 text-left"
+											on:click={() => goToGame(game.id)}
+											on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
+											aria-label={`Go to past game at ${game.location}`}
+										>
+											<h4 class="font-semibold">{game.location}</h4>
+											<p class="text-sm text-muted-foreground">
+												Date: {new Date(game.date_time).toLocaleString()}
+											</p>
+											<p class="text-xs text-muted-foreground">
+												Attended: {game.attending} / {game.attendees}
+											</p>
+										</button>
+									</div>
+									{#if index !== pastGames.length - 1}
+										<Separator class="my-2" />
+									{/if}
+								{/each}
+							{/if}
+						</div>
+					</CardContent>
 				</CardHeader>
-				<CardContent>
-					<div class="space-y-4">
-						{#if upcomingGames.length > 0}
-							<h3 class="font-semibold text-lg">Upcoming Games</h3>
-							{#each upcomingGames as game, index}
-								<div class="flex items-center justify-between">
-									<button
-										class="flex-1 text-left"
-										on:click={() => goToGame(game.id)}
-										on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
-										aria-label={`Go to game at ${game.location}`}
-									>
-										<h4 class="font-semibold">{game.location}</h4>
-										<p class="text-sm text-muted-foreground">
-											Date: {new Date(game.date_time).toLocaleString()}
-										</p>
-										<p class="text-xs text-muted-foreground">
-											Attending: {game.attending} / {game.attendees}
-										</p>
-									</button>
-									<Button
-										variant="outline"
-										size="sm"
-										on:click={(event) => handleAttend(event, game.id)}
-									>
-										Attend
-									</Button>
-								</div>
-								{#if index !== upcomingGames.length - 1}
-									<Separator class="my-2" />
-								{/if}
-							{/each}
-						{/if}
-						
-						{#if pastGames.length > 0}
-							<h3 class="font-semibold text-lg mt-6">Past Games</h3>
-							{#each pastGames as game, index}
-								<div class="flex items-center justify-between opacity-60">
-									<button
-										class="flex-1 text-left"
-										on:click={() => goToGame(game.id)}
-										on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
-										aria-label={`Go to past game at ${game.location}`}
-									>
-										<h4 class="font-semibold">{game.location}</h4>
-										<p class="text-sm text-muted-foreground">
-											Date: {new Date(game.date_time).toLocaleString()}
-										</p>
-										<p class="text-xs text-muted-foreground">
-											Attended: {game.attending} / {game.attendees}
-										</p>
-									</button>
-								</div>
-								{#if index !== pastGames.length - 1}
-									<Separator class="my-2" />
-								{/if}
-							{/each}
-						{/if}
-					</div>
-				</CardContent>
 			</Card>
 		</TabsContent>
 	</Tabs>
