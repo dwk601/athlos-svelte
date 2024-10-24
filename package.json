@@ -41,6 +41,7 @@
 	"dependencies": {
 		"clsx": "^2.1.1",
 		"lucide-svelte": "^0.441.0",
+		"svelte-time-picker": "^2.1.1",
 		"tailwind-merge": "^2.5.2",
 		"tailwind-variants": "^0.2.1",
 		"uuid": "^10.0.0",
