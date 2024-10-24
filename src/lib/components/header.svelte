@@ -1,6 +1,11 @@
 <script lang="ts">
     import { Button } from "$lib/components/ui/button";
     import favicon from "$lib/images/favicon.png";
+    import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "$lib/components/ui/dropdown-menu";
+    import { User } from "lucide-svelte";
+
+    // Placeholder for auth state
+    let isLoggedIn = true; // Change this to false to see the Login/Sign Up buttons
 </script>
 
 <header class="bg-background text-foreground p-4 shadow-md">
@@ -11,8 +16,23 @@
             </a>
         </div>
         <div class="space-x-2">
-            <Button variant="outline">Login</Button>
-            <Button>Sign Up</Button>
+            {#if isLoggedIn}
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <Button variant="ghost" size="icon">
+                            <User class="h-5 w-5" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        <DropdownMenuItem>Settings</DropdownMenuItem>
+                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            {:else}
+                <Button variant="outline">Login</Button>
+                <Button>Sign Up</Button>
+            {/if}
         </div>
     </div>
 </header>
