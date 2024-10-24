@@ -50,8 +50,7 @@
       </div>
     </CardContent>
     <CardFooter>
-      <Button variant="outline" class="w-full">Edit Profile</Button>
+      <Button variant="outline" class="w-full" href="/profile/edit">Edit Profile</Button>
     </CardFooter>
   </Card>
 </div>
-
