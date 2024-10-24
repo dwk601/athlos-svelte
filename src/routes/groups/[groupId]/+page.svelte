@@ -122,7 +122,7 @@
 			</Card>
 		</TabsContent>
 		<TabsContent value="games" class="tab-content-games">
-			<!-- we need to add create game feature from this page -->
+			<!-- we need to add create game feature from this page! -->
 			<Card>
 				<CardHeader>
 					<CardTitle>Games</CardTitle>
