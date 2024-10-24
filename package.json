@@ -40,6 +40,7 @@
 	"type": "module",
 	"dependencies": {
 		"clsx": "^2.1.1",
+		"gsap": "^3.12.5",
 		"lucide-svelte": "^0.441.0",
 		"svelte-time-picker": "^2.1.1",
 		"tailwind-merge": "^2.5.2",
