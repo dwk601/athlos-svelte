@@ -49,8 +49,8 @@
         </section>
       </div>
     </CardContent>
-    <CardFooter>
-      <Button variant="outline" class="w-full" href="/profile/edit">Edit Profile</Button>
+    <CardFooter class="flex justify-center">
+      <Button variant="outline" href="/profile/edit">Edit Profile</Button>
     </CardFooter>
   </Card>
 </div>
