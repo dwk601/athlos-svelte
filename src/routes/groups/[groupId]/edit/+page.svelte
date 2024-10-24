@@ -36,6 +36,15 @@
     let selectedDate: DateValue | undefined = undefined;
     let location = '';
     let selectedTime = '';
+
+    function handleAddGame() {
+        console.log('Add Game clicked:', {
+            date: selectedDate ? selectedDate.toString() : 'Not selected',
+            time: selectedTime,
+            location: location
+        });
+        // TODO: Implement the actual game addition logic
+    }
 </script>
 
 <div class="container mx-auto p-4 space-y-8 max-w-3xl">
@@ -138,7 +147,7 @@
                     <CircleAlert class="h-4 w-4" />
                     <Input bind:value={location} placeholder="Location" />
                 </div>
-                <Button>
+                <Button on:click={handleAddGame}>
                     <Plus class="mr-2 h-4 w-4" /> Add Game
                 </Button>
             </div>
