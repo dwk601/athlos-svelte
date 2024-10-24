@@ -41,7 +41,7 @@
     const sections = document.querySelectorAll('.section');
     gsap.fromTo(sections, 
       { opacity: 0, y: -20 }, 
-      { opacity: 1, y: 0, duration: 0.6, stagger: 0.2 }
+      { opacity: 1, y: 0, duration: 0.4, stagger: 0.2 }
     );
   });
 </script>
