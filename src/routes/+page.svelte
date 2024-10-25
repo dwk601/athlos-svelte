@@ -12,6 +12,9 @@
     function redirectToLocationSpecific() {
         goto('/locationSpecific');
     }
+    function redirectToLocationSearchView() {
+        goto('/locationSearchView');
+    }
 
     onMount(() => {
         gsap.from(".fade-in", {
@@ -30,6 +33,7 @@
             <p class="text-xl text-muted-foreground mb-8">Streamline organization, boost engagement, and elevate team performance</p>
             <Button size="lg" on:click={redirectToGroups}>Get Started</Button>
             <Button size="lg" on:click={redirectToLocationSpecific}>Location Specific</Button>
+            <Button size="lg" on:click={redirectToLocationSearchView}>Location Search View</Button>
         </section>
 
         <section class="grid md:grid-cols-2 gap-8">
