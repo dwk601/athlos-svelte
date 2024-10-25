@@ -9,6 +9,9 @@
     function redirectToGroups() {
         goto('/groups');
     }
+    function redirectToLocationSpecific() {
+        goto('/locationSpecific');
+    }
 
     onMount(() => {
         gsap.from(".fade-in", {
@@ -26,6 +29,7 @@
             <h1 class="text-5xl font-bold mb-4">Manage Your Sports Group with Ease</h1>
             <p class="text-xl text-muted-foreground mb-8">Streamline organization, boost engagement, and elevate team performance</p>
             <Button size="lg" on:click={redirectToGroups}>Get Started</Button>
+            <Button size="lg" on:click={redirectToLocationSpecific}>Location Specific</Button>
         </section>
 
         <section class="grid md:grid-cols-2 gap-8">
