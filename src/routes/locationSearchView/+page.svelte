@@ -15,28 +15,15 @@
             <div class="container mx-auto text-center">
                 <div class="flex">
                     <div class="flex-1 p-4">
-                        <div class="border border-gray-300 rounded-lg p-6 shadow-lg">
-                            <h2>View Locations</h2>
-                            <button type="button" class="btn btn-primary border border-gray-200 rounded-lg p-2 shadow-sm w-full mb-4">Location 1</button>
-                            <button type="button" class="btn btn-primary border border-gray-200 rounded-lg p-2 shadow-sm w-full mb-4">Location 2</button>
-                            <button type="button" class="btn btn-primary border border-gray-200 rounded-lg p-2 shadow-sm w-full mb-4">Location 3</button>
-                            <button type="button" class="btn btn-primary border border-gray-200 rounded-lg p-2 shadow-sm w-full mb-4">Location 4</button>
-                            <button type="button" class="btn btn-primary border border-gray-200 rounded-lg p-2 shadow-sm w-full mb-4">Location 5</button>
-                        </div>
+                        <a href="view-location" class="bg-background min-h-64 flex items-center justify-center cursor-pointer border border-gray-300 rounded-lg shadow-lg">
+                            <h1 class="text-xl font-bold">View Location</h1>
+                        </a> 
                     </div>
                     
                     <div class="flex-1 p-4">
-                        <div class="border border-gray-300 rounded-lg p-6 shadow-lg">
-                            <h2>Create Location</h2>
-                            <div class="flex flex-col">
-                                <input
-                                type="text"
-                                id="new-location"
-                                class="border border-gray-300 rounded-md p-2 w-full"
-                                placeholder="Enter New Location"/>
-                            </div>
-                            <button type="button" class="btn btn-primary border border-gray-200 rounded-lg p-2 shadow-sm mt-4">Submit</button>
-                        </div>
+                        <a href="create-location" class="bg-background min-h-64 flex items-center justify-center cursor-pointer border border-gray-300 rounded-lg shadow-lg">
+                            <h1 class="text-xl font-bold">Create Location</h1>
+                        </a> 
                     </div>
                 </div>
             </div>
