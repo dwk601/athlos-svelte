@@ -21,7 +21,7 @@
 			</a>
 		</div>
 		<div class="space-x-2">
-			{#if isLoggedIn}
+			<!-- {#if isLoggedIn} -->
 				<DropdownMenu>
 					<DropdownMenuTrigger>
 						<Button variant="ghost" size="icon">
@@ -35,14 +35,10 @@
 						<DropdownMenuItem>Logout</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
-			{:else}
-				<Button variant="outline">
-					<a href="/api/auth/login">Login</a>
-				</Button>
-				<Button>
-					<a href="/api/auth/register">Sign Up</a>
-				</Button>
-			{/if}
+			<!-- {:else} -->
+				<Button variant="outline" href="/login">Login</Button>
+				<Button href="/signup">Sign Up</Button>
+			<!-- {/if} -->
 		</div>
 	</div>
 </header>
