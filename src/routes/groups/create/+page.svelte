@@ -8,6 +8,8 @@
     import { CircleAlert } from "lucide-svelte";
     import { groups } from "../../data";
     import { v4 as uuidv4 } from 'uuid';
+    import { onMount } from 'svelte';
+    import { gsap } from 'gsap';
 
     let name = "";
     let description = "";
@@ -41,6 +43,14 @@
         name = "";
         description = "";
     }
+
+    onMount(() => {
+        const form = document.querySelector('form');
+        gsap.fromTo(form, 
+            { opacity: 0, y: -20 }, 
+            { opacity: 1, y: 0, duration: 0.6 }
+        );
+    });
 </script>
 
 <div class="container mx-auto p-4 max-w-3xl">
