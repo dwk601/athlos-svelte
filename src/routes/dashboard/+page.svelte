@@ -61,28 +61,26 @@
 		</CardHeader>
 		<CardContent>
 			{#if upcomingGames.length > 0}
-				<ul class="space-y-2">
+				<div class="grid gap-4 md:grid-cols-2">
 					{#each upcomingGames as game}
-						<li>
-							<div
-								on:click={() => goToGame(String(game.id), String(game.group_id))}
-								on:keydown={(e) =>
-									e.key === 'Enter' && goToGame(String(game.id), String(game.group_id))}
-								class="grid cursor-pointer grid-cols-[2fr_1fr_1fr] items-center gap-4"
-								role="button"
-								tabindex="0"
-							>
-								<span>{new Date(game.date_time).toLocaleString()}</span>
-								<span>{game.location}</span>
-								<span>
-									<Badge variant="outline">
-										{groups.find((g) => g.id === game.group_id)?.name}
-									</Badge>
-								</span>
-							</div>
-						</li>
+						<div
+							on:click={() => goToGame(String(game.id), String(game.group_id))}
+							on:keydown={(e) =>
+								e.key === 'Enter' && goToGame(String(game.id), String(game.group_id))}
+							class="game-item cursor-pointer"
+							role="button"
+							tabindex="0"
+						>
+							<span>{new Date(game.date_time).toLocaleString()}</span>
+							<span>{game.location}</span>
+							<span>
+								<Badge variant="outline">
+									{groups.find((g) => g.id === game.group_id)?.name}
+								</Badge>
+							</span>
+						</div>
 					{/each}
-				</ul>
+				</div>
 			{:else}
 				<p>No upcoming games.</p>
 			{/if}
@@ -96,31 +94,37 @@
 		</CardHeader>
 		<CardContent>
 			{#if previousGames.length > 0}
-				<ul class="space-y-2">
+				<div class="grid gap-4 md:grid-cols-2">
 					{#each previousGames as game}
-						<li>
-							<div
-								on:click={() => goToGame(String(game.id), String(game.group_id))}
-								on:keydown={(e) =>
-									e.key === 'Enter' && goToGame(String(game.id), String(game.group_id))}
-								class="grid cursor-pointer grid-cols-[2fr_1fr_1fr] items-center gap-4"
-								role="button"
-								tabindex="0"
-							>
-								<span>{new Date(game.date_time).toLocaleString()}</span>
-								<span>{game.location}</span>
-								<span>
-									<Badge variant="outline">
-										{groups.find((g) => g.id === game.group_id)?.name}
-									</Badge>
-								</span>
-							</div>
-						</li>
+						<div
+							on:click={() => goToGame(String(game.id), String(game.group_id))}
+							on:keydown={(e) =>
+								e.key === 'Enter' && goToGame(String(game.id), String(game.group_id))}
+							class="game-item cursor-pointer"
+							role="button"
+							tabindex="0"
+						>
+							<span>{new Date(game.date_time).toLocaleString()}</span>
+							<span>{game.location}</span>
+							<span>
+								<Badge variant="outline">
+									{groups.find((g) => g.id === game.group_id)?.name}
+								</Badge>
+							</span>
+						</div>
 					{/each}
-				</ul>
+				</div>
 			{:else}
 				<p>No previous games.</p>
 			{/if}
 		</CardContent>
 	</Card>
 </div>
+
+<style>
+	.game-item {
+		border: 1px solid #e5e7eb; /* Light gray border */
+		padding: 1rem; /* Padding around each game item */
+		border-radius: 0.5rem; /* Rounded corners */
+	}
+</style>
