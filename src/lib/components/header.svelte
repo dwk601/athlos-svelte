@@ -29,6 +29,7 @@
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent>
+					<DropdownMenuItem><a href="/dashboard">Dashboard</a></DropdownMenuItem>
 					<DropdownMenuItem>
 						<a href="/profile">Profile</a>
 					</DropdownMenuItem>
