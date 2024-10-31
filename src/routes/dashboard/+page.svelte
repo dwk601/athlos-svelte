@@ -13,6 +13,11 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
+	import { goto } from '$app/navigation';
+
+	function goToGame(gameId: string, groupId: string) {
+		goto(`/groups/${groupId}/games/${gameId}`);
+	}
 
 	onMount(() => {
 		const sections = document.querySelectorAll('.section');
@@ -59,7 +64,14 @@
 				<ul class="space-y-2">
 					{#each upcomingGames as game}
 						<li>
-							<a href="/games/{game.id}" class="grid grid-cols-[2fr_1fr_1fr] items-center gap-4">
+							<div
+								on:click={() => goToGame(String(game.id), String(game.group_id))}
+								on:keydown={(e) =>
+									e.key === 'Enter' && goToGame(String(game.id), String(game.group_id))}
+								class="grid cursor-pointer grid-cols-[2fr_1fr_1fr] items-center gap-4"
+								role="button"
+								tabindex="0"
+							>
 								<span>{new Date(game.date_time).toLocaleString()}</span>
 								<span>{game.location}</span>
 								<span>
@@ -67,7 +79,7 @@
 										{groups.find((g) => g.id === game.group_id)?.name}
 									</Badge>
 								</span>
-							</a>
+							</div>
 						</li>
 					{/each}
 				</ul>
@@ -87,7 +99,14 @@
 				<ul class="space-y-2">
 					{#each previousGames as game}
 						<li>
-							<a href="/games/{game.id}" class="grid grid-cols-[2fr_1fr_1fr] items-center gap-4">
+							<div
+								on:click={() => goToGame(String(game.id), String(game.group_id))}
+								on:keydown={(e) =>
+									e.key === 'Enter' && goToGame(String(game.id), String(game.group_id))}
+								class="grid cursor-pointer grid-cols-[2fr_1fr_1fr] items-center gap-4"
+								role="button"
+								tabindex="0"
+							>
 								<span>{new Date(game.date_time).toLocaleString()}</span>
 								<span>{game.location}</span>
 								<span>
@@ -95,7 +114,7 @@
 										{groups.find((g) => g.id === game.group_id)?.name}
 									</Badge>
 								</span>
-							</a>
+							</div>
 						</li>
 					{/each}
 				</ul>
