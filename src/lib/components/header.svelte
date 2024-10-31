@@ -16,7 +16,7 @@
 <header class="bg-background p-4 text-foreground shadow-md">
 	<div class="container mx-auto flex items-center justify-between">
 		<div class="flex items-center">
-			<a href="/groups">
+			<a href="/">
 				<img src={favicon} alt="Logo" class="mr-2 h-8 w-auto" />
 			</a>
 		</div>
