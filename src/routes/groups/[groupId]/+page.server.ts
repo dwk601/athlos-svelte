@@ -1,6 +1,6 @@
 // routes/groups/[groupId]/+page.server.ts
 import type { PageServerLoad } from './$types';
-import { groups, groupMembers, users, games, gameAttendees } from '../../data';
+import { groups, groupMembers, users, games, gameAttendees, groupJoinRequests } from '../../data';
 import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -29,6 +29,30 @@ export const load: PageServerLoad = async ({ params }) => {
             };
         });
 
+    // Assume currentUserId is obtained from session or authentication
+    const currentUserId = users[0].id; // For example purposes
+
+    // Check if the current user is the leader of the group
+    const isLeader = groupMembers.some(
+        (gm) => gm.group_id === groupIdNumber && gm.user_id === currentUserId && gm.role === 'leader'
+    );
+
+    let joinRequests: { id: string; user: { id: string; name: string; email: string; password: string; created_at: Date; updated_at: Date; } | undefined; requested_at: Date; }[] = [];
+
+    if (isLeader) {
+        // Fetch pending join requests for the group
+        joinRequests = groupJoinRequests
+            .filter((req) => req.group_id === groupIdNumber)
+            .map((req) => {
+                const user = users.find((u) => u.id === req.user_id);
+                return {
+                    id: req.id,
+                    user,
+                    requested_at: req.requested_at
+                };
+            });
+    }
+
     // Fetch all games for the group and include attendance information
     const allGames = games
         .filter((game) => game.group_id === groupIdNumber)
@@ -46,6 +70,7 @@ export const load: PageServerLoad = async ({ params }) => {
     return {
         group,
         members,
-        allGames
+        allGames,
+        joinRequests
     };
 };

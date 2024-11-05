@@ -126,6 +126,22 @@ export const groupMembers = [
 	}
 ];
 
+// GroupJoinRequests Table
+export const groupJoinRequests = [
+    {
+        id: uuidv4(),
+        group_id: groups[0].id, // Basketball Enthusiasts
+        user_id: users[5].id,   // Bob Davis
+        requested_at: new Date()
+    },
+    {
+        id: uuidv4(),
+        group_id: groups[2].id, // Soccer Lovers
+        user_id: users[1].id,   // Jane Smith
+        requested_at: new Date()
+    }
+];
+
 // Games Table
 export const games = [
 	{
