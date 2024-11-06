@@ -71,6 +71,7 @@ export const load: PageServerLoad = async ({ params }) => {
         group,
         members,
         allGames,
-        joinRequests
+        joinRequests,
+        isLeader // Add isLeader to the returned data
     };
 };

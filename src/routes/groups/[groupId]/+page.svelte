@@ -19,7 +19,7 @@
 
 	export let data: PageData;
 
-	const { group, members, allGames } = data;
+	const { group, members, allGames, joinRequests, isLeader } = data;
 
 	function editGroup() {
 		goto(`/groups/${group.id}/edit`);
@@ -49,6 +49,18 @@
 		if (content) {
 			gsap.fromTo(content, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
 		}
+	}
+
+	function acceptRequest(requestId: string) {
+		// Simulate accepting the request
+		console.log(`Accepted request ${requestId}`);
+		// TODO: Implement actual accept logic
+	}
+
+	function declineRequest(requestId: string) {
+		// Simulate declining the request
+		console.log(`Declined request ${requestId}`);
+		// TODO: Implement actual decline logic
 	}
 
 	onMount(() => {
@@ -120,6 +132,40 @@
 					</div>
 				</CardContent>
 			</Card>
+
+			{#if isLeader}
+				<Card class="mt-4">
+					<CardHeader>
+						<CardTitle>Pending Join Requests</CardTitle>
+					</CardHeader>
+					<CardContent>
+						{#if joinRequests.length > 0}
+							<div class="space-y-4">
+								{#each joinRequests as request, index (request.id)}
+									<div class="flex items-center justify-between">
+										<div>
+											<p class="text-sm font-medium">{request.user?.name}</p>
+											<p class="text-xs text-muted-foreground">
+												Requested at: {new Date(request.requested_at).toLocaleString()}
+											</p>
+										</div>
+										<div class="flex space-x-2">
+											<Button size="sm" on:click={() => acceptRequest(request.id)}>Accept</Button>
+											<Button size="sm" variant="destructive" on:click={() => declineRequest(request.id)}>Decline</Button>
+										</div>
+									</div>
+									{#if index !== joinRequests.length - 1}
+										<Separator class="my-2" />
+									{/if}
+								{/each}
+							</div>
+						{:else}
+							<p>No pending join requests.</p>
+						{/if}
+					</CardContent>
+				</Card>
+			{/if}
+
 		</TabsContent>
 		<TabsContent value="games" class="tab-content-games">
 			<!-- we need to add create game feature from this page! -->
