@@ -1,48 +1,27 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { Avatar, AvatarFallback, AvatarImage } from '$lib/components/ui/avatar';
-	import { Button } from '$lib/components/ui/button';
-	import {
-		Card,
-		CardContent,
-		CardDescription,
-		CardFooter,
-			CardHeader,
-			CardTitle
-	} from '$lib/components/ui/card';
-	import { Separator } from '$lib/components/ui/separator';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 	import { Users, CalendarDays, Info } from 'lucide-svelte';
-	import { goto } from '$app/navigation';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
 
+	import GroupHeader from '../../../lib/components/GroupHeader.svelte';
+	import GroupInfo from '../../../lib/components/GroupInfo.svelte';
+	import GroupMembers from '../../../lib/components/GroupMembers.svelte';
+	import GroupGames from '../../../lib/components/GroupGames.svelte';
+
 	export let data: PageData;
 
-	const { group, members, allGames, joinRequests, isLeader } = data;
-
-	function editGroup() {
-		goto(`/groups/${group.id}/edit`);
-	}
-
-	function goToGame(gameId: string) {
-		goto(`/groups/${group.id}/games/${gameId}`);
-	}
-
-	function handleAttend(event: Event, gameId: string) {
-		event.stopPropagation();
-		// Add your attend logic here
-		console.log(`Attending game ${gameId}`);
-	}
-
-	// Function to determine if a game is in the past
-	function isPastGame(gameDate: string): boolean {
-		return new Date(gameDate) < new Date();
-	}
+	let { group, members, allGames, joinRequests, isLeader } = data;
+	group = { ...group, id: Number(group.id) };
 
 	// Separate games into upcoming and past
 	$: upcomingGames = allGames.filter((game) => !isPastGame(game.date_time));
 	$: pastGames = allGames.filter((game) => isPastGame(game.date_time)).reverse();
+
+	function isPastGame(gameDate: string): boolean {
+		return new Date(gameDate) < new Date();
+	}
 
 	function animateTabContent(tabValue: string) {
 		const content = document.querySelector(`.tab-content-${tabValue}`);
@@ -51,43 +30,16 @@
 		}
 	}
 
-	function acceptRequest(requestId: string) {
-		// Simulate accepting the request
-		console.log(`Accepted request ${requestId}`);
-		// TODO: Implement actual accept logic
-	}
-
-	function declineRequest(requestId: string) {
-		// Simulate declining the request
-		console.log(`Declined request ${requestId}`);
-		// TODO: Implement actual decline logic
-	}
-
 	onMount(() => {
 		const sections = document.querySelectorAll('.section');
-		gsap.fromTo(sections, 
-			{ opacity: 0, y: 20 }, 
-			{ opacity: 1, y: 0, duration: 0.6, stagger: 0.2 }
-		);
+		gsap.fromTo(sections, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.2 });
 	});
 </script>
 
-<div class="container mx-auto px-4 py-8 max-w-3xl">
-	<Card class="mb-8 section">
-		<CardHeader>
-			<CardTitle>{group.name}</CardTitle>
-			<CardDescription>{group.description}</CardDescription>
-		</CardHeader>
-		<CardContent>
-			<p class="text-sm text-muted-foreground">Members: {members.length}</p>
-		</CardContent>
-		<CardFooter class="flex justify-between">
-			<Button>Join Group</Button>
-			<Button on:click={editGroup}>Edit Group</Button>
-		</CardFooter>
-	</Card>
+<div class="container mx-auto max-w-3xl px-4 py-8">
+	<GroupHeader group={{ ...group, id: String(group.id) }} {members} {isLeader} />
 
-	<Tabs value="info" class="w-full section">
+	<Tabs value="info" class="section w-full">
 		<TabsList class="grid w-full grid-cols-3">
 			<TabsTrigger value="info" on:click={() => animateTabContent('info')}>
 				<Info class="mr-2 h-4 w-4" />Info
@@ -100,141 +52,13 @@
 			</TabsTrigger>
 		</TabsList>
 		<TabsContent value="info" class="tab-content-info">
-			<Card>
-				<CardHeader>
-					<CardTitle>Group Information</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<p>{group.description}</p>
-				</CardContent>
-			</Card>
+			<GroupInfo {group} />
 		</TabsContent>
 		<TabsContent value="members" class="tab-content-members">
-			<Card>
-				<CardHeader>
-					<CardTitle>Members</CardTitle>
-					<CardDescription>Group members ({members.length})</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-						{#each members as member}
-							<div class="flex items-center space-x-4">
-								<Avatar>
-									<AvatarImage alt={member.name} />
-									<AvatarFallback>{(member.name ?? '').charAt(0)}</AvatarFallback>
-								</Avatar>
-								<div>
-									<p class="text-sm font-medium">{member.name}</p>
-									<p class="text-xs text-muted-foreground">{member.role}</p>
-								</div>
-							</div>
-						{/each}
-					</div>
-				</CardContent>
-			</Card>
-
-			{#if isLeader}
-				<Card class="mt-4">
-					<CardHeader>
-						<CardTitle>Pending Join Requests</CardTitle>
-					</CardHeader>
-					<CardContent>
-						{#if joinRequests.length > 0}
-							<div class="space-y-4">
-								{#each joinRequests as request, index (request.id)}
-									<div class="flex items-center justify-between">
-										<div>
-											<p class="text-sm font-medium">{request.user?.name}</p>
-											<p class="text-xs text-muted-foreground">
-												Requested at: {new Date(request.requested_at).toLocaleString()}
-											</p>
-										</div>
-										<div class="flex space-x-2">
-											<Button size="sm" on:click={() => acceptRequest(request.id)}>Accept</Button>
-											<Button size="sm" variant="destructive" on:click={() => declineRequest(request.id)}>Decline</Button>
-										</div>
-									</div>
-									{#if index !== joinRequests.length - 1}
-										<Separator class="my-2" />
-									{/if}
-								{/each}
-							</div>
-						{:else}
-							<p>No pending join requests.</p>
-						{/if}
-					</CardContent>
-				</Card>
-			{/if}
-
+			<GroupMembers {members} {joinRequests} {isLeader} />
 		</TabsContent>
 		<TabsContent value="games" class="tab-content-games">
-			<!-- we need to add create game feature from this page! -->
-			<Card>
-				<CardHeader>
-					<CardTitle>Games</CardTitle>
-					<CardDescription>Scheduled events for the group</CardDescription>
-					<CardContent>
-						<div class="space-y-4">
-							{#if upcomingGames.length > 0}
-								<h3 class="font-semibold text-lg">Upcoming Games</h3>
-								{#each upcomingGames as game, index}
-									<div class="flex items-center justify-between">
-										<button
-											class="flex-1 text-left"
-											on:click={() => goToGame(game.id)}
-											on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
-											aria-label={`Go to game at ${game.location}`}
-										>
-											<h4 class="font-semibold">{game.location}</h4>
-											<p class="text-sm text-muted-foreground">
-												Date: {new Date(game.date_time).toLocaleString()}
-											</p>
-											<p class="text-xs text-muted-foreground">
-												Attending: {game.attending} / {game.attendees}
-											</p>
-										</button>
-										<Button
-											variant="outline"
-											size="sm"
-											on:click={(event) => handleAttend(event, game.id)}
-										>
-											Attend
-										</Button>
-									</div>
-									{#if index !== upcomingGames.length - 1}
-										<Separator class="my-2" />
-									{/if}
-								{/each}
-							{/if}
-							
-							{#if pastGames.length > 0}
-								<h3 class="font-semibold text-lg mt-6">Past Games</h3>
-								{#each pastGames as game, index}
-									<div class="flex items-center justify-between opacity-60">
-										<button
-											class="flex-1 text-left"
-											on:click={() => goToGame(game.id)}
-											on:keydown={(event) => event.key === 'Enter' && goToGame(game.id)}
-											aria-label={`Go to past game at ${game.location}`}
-										>
-											<h4 class="font-semibold">{game.location}</h4>
-											<p class="text-sm text-muted-foreground">
-												Date: {new Date(game.date_time).toLocaleString()}
-											</p>
-											<p class="text-xs text-muted-foreground">
-												Attended: {game.attending} / {game.attendees}
-											</p>
-										</button>
-									</div>
-									{#if index !== pastGames.length - 1}
-										<Separator class="my-2" />
-									{/if}
-								{/each}
-							{/if}
-						</div>
-					</CardContent>
-				</CardHeader>
-			</Card>
+			<GroupGames {upcomingGames} {pastGames} />
 		</TabsContent>
 	</Tabs>
 </div>
