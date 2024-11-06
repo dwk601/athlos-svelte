@@ -10,10 +10,12 @@
 
 	function acceptRequest(requestId: string) {
 		// Implement accept logic
+		console.log("Accepting request with ID:", requestId);
 	}
 
 	function declineRequest(requestId: string) {
 		// Implement decline logic
+		console.log("Declining request with ID:", requestId);
 	}
 </script>
 
