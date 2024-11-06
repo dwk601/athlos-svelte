@@ -13,6 +13,7 @@
 
 	function joinGroup() {
 		// Implement join group logic
+		console.log('Joining group:', group.name);
 	}
 </script>
 
