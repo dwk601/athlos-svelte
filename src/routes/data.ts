@@ -147,7 +147,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[0].id,
-		date_time: new Date('2024-08-15T06:00:00'),
+		date_time: new Date('2024-11-15T06:00:00'), // Future date
 		location: 'Provo, UT',
 		created_by: users[0].id,
 		created_at: new Date(),
@@ -156,7 +156,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[2].id,
-		date_time: new Date('2024-08-10T07:00:00'),
+		date_time: new Date('2024-11-10T07:00:00'), // Past date
 		location: 'Provo, UT',
 		created_by: users[2].id,
 		created_at: new Date(),
@@ -165,7 +165,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[0].id,
-		date_time: new Date('2024-08-05T21:00:00'),
+		date_time: new Date('2024-11-05T21:00:00'), // Past date
 		location: 'Provo, UT',
 		created_by: users[3].id,
 		created_at: new Date(),
@@ -174,7 +174,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[1].id,
-		date_time: new Date('2024-10-15T06:00:00'),
+		date_time: new Date('2024-11-20T06:00:00'), // Future date
 		location: 'Provo, UT',
 		created_by: users[0].id,
 		created_at: new Date(),
@@ -183,7 +183,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[2].id,
-		date_time: new Date('2024-10-18T07:00:00'),
+		date_time: new Date('2024-11-18T07:00:00'), // Future date
 		location: 'Salt Lake City, UT',
 		created_by: users[2].id,
 		created_at: new Date(),
@@ -192,7 +192,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[0].id,
-		date_time: new Date('2024-10-20T21:00:00'),
+		date_time: new Date('2024-11-01T21:00:00'), // Past date
 		location: 'Ogden, UT',
 		created_by: users[3].id,
 		created_at: new Date(),
@@ -201,7 +201,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[0].id,
-		date_time: new Date('2024-11-01T18:00:00'),
+		date_time: new Date('2024-11-25T18:00:00'), // Future date
 		location: 'Provo, UT',
 		created_by: users[0].id,
 		created_at: new Date(),
@@ -210,7 +210,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[0].id,
-		date_time: new Date('2024-10-05T19:00:00'),
+		date_time: new Date('2024-10-05T19:00:00'), // Past date
 		location: 'Provo, UT',
 		created_by: users[3].id,
 		created_at: new Date(),
@@ -219,7 +219,7 @@ export const games = [
 	{
 		id: uuidv4(),
 		group_id: groups[0].id,
-		date_time: new Date('2024-10-21T18:00:00'),
+		date_time: new Date('2024-11-21T18:00:00'), // Future date
 		location: 'Provo, UT',
 		created_by: users[3].id,
 		created_at: new Date(),
