@@ -58,7 +58,7 @@
 			<GroupMembers {members} {joinRequests} {isLeader} />
 		</TabsContent>
 		<TabsContent value="games" class="tab-content-games">
-			<GroupGames {upcomingGames} {pastGames} />
+			<GroupGames {upcomingGames} {pastGames} groupId={String(group.id)} />
 		</TabsContent>
 	</Tabs>
 </div>

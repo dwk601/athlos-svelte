@@ -6,9 +6,10 @@
 
 	export let upcomingGames;
 	export let pastGames;
+	export let groupId: string; // Add this line
 
 	function goToGame(gameId: string) {
-		goto(`/groups/${gameId}`);
+		goto(`/groups/${groupId}/games/${gameId}`); // Update the path
 	}
 
 	function handleAttend(event: Event, gameId: string) {
