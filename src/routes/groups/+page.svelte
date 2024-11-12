@@ -12,7 +12,6 @@
 	} from '$lib/components/ui/card';
 	import { Avatar, AvatarFallback, AvatarImage } from '$lib/components/ui/avatar';
 	import { Search, Plus } from 'lucide-svelte';
-	import { toast } from 'svelte-sonner';
 	import { groups } from '../data';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';

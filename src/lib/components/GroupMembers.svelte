@@ -1,8 +1,15 @@
 <script lang="ts">
-	import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '$lib/components/ui/card';
+	import {
+		Card,
+		CardContent,
+		CardDescription,
+		CardHeader,
+		CardTitle
+	} from '$lib/components/ui/card';
 	import { Avatar, AvatarFallback, AvatarImage } from '$lib/components/ui/avatar';
 	import { Button } from '$lib/components/ui/button';
 	import { Separator } from '$lib/components/ui/separator';
+	import MemberCard from '$lib/components/MemberCard.svelte';
 
 	export let members;
 	export let joinRequests;
@@ -10,12 +17,12 @@
 
 	function acceptRequest(requestId: string) {
 		// Implement accept logic
-		console.log("Accepting request with ID:", requestId);
+		console.log('Accepting request with ID:', requestId);
 	}
 
 	function declineRequest(requestId: string) {
 		// Implement decline logic
-		console.log("Declining request with ID:", requestId);
+		console.log('Declining request with ID:', requestId);
 	}
 </script>
 
@@ -27,16 +34,7 @@
 	<CardContent>
 		<div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
 			{#each members as member}
-				<div class="flex items-center space-x-4">
-					<Avatar>
-						<AvatarImage alt={member.name} />
-						<AvatarFallback>{(member.name ?? '').charAt(0)}</AvatarFallback>
-					</Avatar>
-					<div>
-						<p class="text-sm font-medium">{member.name}</p>
-						<p class="text-xs text-muted-foreground">{member.role}</p>
-					</div>
-				</div>
+				<MemberCard {member} />
 			{/each}
 		</div>
 	</CardContent>
@@ -61,7 +59,9 @@
 							</div>
 							<div class="flex space-x-2">
 								<Button size="sm" on:click={() => acceptRequest(request.id)}>Accept</Button>
-								<Button size="sm" variant="destructive" on:click={() => declineRequest(request.id)}>Decline</Button>
+								<Button size="sm" variant="destructive" on:click={() => declineRequest(request.id)}
+									>Decline</Button
+								>
 							</div>
 						</div>
 						{#if index !== joinRequests.length - 1}

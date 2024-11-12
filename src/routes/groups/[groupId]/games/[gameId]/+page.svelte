@@ -8,6 +8,7 @@
     import * as AlertDialog from "$lib/components/ui/alert-dialog";
     import { onMount } from 'svelte';
     import { gsap } from 'gsap';
+    import MemberCard from '$lib/components/MemberCard.svelte';
 
     export let data: PageData;
 
@@ -88,16 +89,7 @@
             </div>
             <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {#each attendees as attendee}
-                    <div class="flex items-center space-x-4">
-                        <Avatar>
-                            <AvatarImage alt={attendee.user?.name} />
-                            <AvatarFallback>{attendee.user?.name?.charAt(0) ?? ''}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                            <p class="text-sm font-medium">{attendee.user?.name}</p>
-                            <p class="text-xs text-muted-foreground">{attendee.status}</p>
-                        </div>
-                    </div>
+                    <MemberCard member={{ name: attendee.user?.name, role: attendee.status }} />
                 {/each}
             </div>
         </CardContent>
