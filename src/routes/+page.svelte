@@ -29,20 +29,16 @@
         </section>
 
         <section class="grid md:grid-cols-2 gap-8">
-            <Card class="fade-in">
-                <CardHeader>
-                    <Users class="w-12 h-12 text-primary mb-2" />
-                    <CardTitle>Team Management</CardTitle>
-                </CardHeader>
-                <CardContent>Easily manage rosters, roles, and communications within your sports group.</CardContent>
-            </Card>
-            <Card class="fade-in">
-                <CardHeader>
-                    <Calendar class="w-12 h-12 text-primary mb-2" />
-                    <CardTitle>Event Scheduling</CardTitle>
-                </CardHeader>
-                <CardContent>Coordinate practices, games, and team events with an intuitive calendar system.</CardContent>
-            </Card>
+            <div class="fade-in text-center p-6">
+                <Users class="w-12 h-12 text-primary mb-4 mx-auto" />
+                <h2 class="text-2xl font-bold mb-2">Team Management</h2>
+                <p class="text-muted-foreground">Easily manage rosters, roles, and communications within your sports group.</p>
+            </div>
+            <div class="fade-in text-center p-6">
+                <Calendar class="w-12 h-12 text-primary mb-4 mx-auto" />
+                <h2 class="text-2xl font-bold mb-2">Event Scheduling</h2>
+                <p class="text-muted-foreground">Coordinate practices, games, and team events with an intuitive calendar system.</p>
+            </div>
         </section>
     </main>
 </div>
